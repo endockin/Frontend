@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('cloudEApp', [
+  .module('VMFactoryApp', [
     'ngAnimate',
     'ngAria',
     'ngCookies',

@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the cloudEApp
  */
-angular.module('cloudEApp')
+angular.module('VMFactoryApp')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

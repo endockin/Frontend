@@ -1,3 +1,11 @@
+/*
+color-primary:      #1d2e2f
+color-secondary:    #394d54
+color-main:         #373a39
+color-general:      #707070
+*/
+
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -5,79 +13,204 @@
   padding: 0.2em 0;
 }
 
+/* Mobile first styles */
+
+.mob-div-10, .mob-div-20, .mob-div-25, .mob-div-33, .mob-div-50, .mob-div-66, .mob-div-75 {
+    float:left;
+    box-sizing:border-box;
+}
+.mob-div-10 {width: 10%}
+.mob-div-20 {width: 20%}
+.mob-div-25 {width: 25%}
+.mob-div-33 {width: 33.333%}
+.mob-div-50 {width: 50%}
+.mob-div-66 {width: 66.666%}
+.mob-div-75 {width: 75%}
+
+.mob-text-left {text-align: left}
+.mob-text-right {text-align: right}
+.mob-text-center {text-align: center}
+
+@media only screen and (min-width: 480px) {
+    .tab-div-10, .tab-div-20, .tab-div-25, .tab-div-33, .tab-div-50, .tab-div-66, .tab-div-75, .tab-div-100 {float:left}
+    .tab-div-10 {width: 10%}
+    .tab-div-20 {width: 20%}
+    .tab-div-25 {width: 25%}
+    .tab-div-33 {width: 33.333%}
+    .tab-div-50 {width: 50%}
+    .tab-div-66 {width: 66.666%}
+    .tab-div-75 {width: 75%}
+    .tab-div-100 {width: 100%}
+}
+
+@media only screen and (min-width: 768px) {
+    .sd-div-10, .sd-div-20, .sd-div-25, .sd-div-33, .sd-div-50, .sd-div-66, .sd-div-75 {float:left}
+    .sd-div-10 {width: 10%}
+    .sd-div-20 {width: 20%}
+    .sd-div-25 {width: 25%}
+    .sd-div-33 {width: 33.333%}
+    .sd-div-50 {width: 50%}
+    .sd-div-66 {width: 66.666%}
+    .sd-div-75 {width: 75%}
+}
+
+@media only screen and (min-width: 1140px) {
+    .div-10, .div-20, .div-25, .div-33, .div-50, .div-66, .div-75 {float:left}
+    .div-10 {width: 10%}
+    .div-20 {width: 20%}
+    .div-25 {width: 25%}
+    .div-33 {width: 33.333%}
+    .div-50 {width: 50%}
+    .div-66 {width: 66.666%}
+    .div-75 {width: 75%}
+}
+
+@media (max-width: 479px) {
+    .mob-clear{clear:left}
+}
+@media (min-width: 480px) and (max-width: 767px) {
+    .mob-clear{clear:left}
+    .tab-clear{clear: left}
+}
+@media (min-width: 768px) and (max-width: 1139px) {
+    .mob-clear{clear:left}
+    .tab-clear{clear: left}
+    .sd-clear{clear: left}
+}
+
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.main-container:after {
+    content:"";
+    clear:both;
+    display: table;
+}
+.row {
+    clear: both;
+    width: 100%;
+    border: 1px solid transparent;
+    overflow: auto;
+}
+.row:before, .row:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/*general padding between columns*/
+.pad-sides {padding-left: 10px; padding-right: 10px}
+.pad-right {padding-right:10px}
+.pad-left {padding-left:10px}
+.grid-sides {margin-left:-10px; margin-right:-10px}
+
+/*small padding*/
+.pad-small-sides {padding-left: 5px;padding-right: 5px}
+.pad-small-right {padding-right:5px}
+.pad-small-left{padding-left:5px}
+.grid-small-sides{margin-left:-5px;margin-right:-5px}
+
+/*large padding*/
+.pad-large-sides {padding-left:20px;padding-right:20px}
+.pad-large-left{padding-left:20px}
+.add-large-right {padding-right:20px}
+.grid-large-sides {margin-left:-20px;margin-right:-20px}
+
+/*xl padding*/
+
+.pad-top {padding-top:10px}
+.pad-large-top{padding-top:20px}
+
+.pad-bot {padding-bottom:10px}
+.pad-large-bot{padding-bottom:20px}
+
+.pad-row {padding-top: 10px;padding-bottom:10px}
+.pad-xxlarge-row {padding-top: 80px;padding-bottom: 80px}
+.pad-xlarge-row {padding-top: 40px;padding-bottom: 40px}
+.pad-large-row {padding-top: 20px;padding-bottom: 20px}
+.pad-small-row {padding-top:5px;padding-bottom:5px}
+
+.margin-bot {margin-bottom:10px}
+.margin-bot-large {margin-bottom:20px}
+.margin-bot-small{margin-bottom:5px}
+
+.text-resize-xxl {font-size:2em}
+.text-resize-xl {font-size:1.5em}
+.text-resize-l {font-size:1.2em}
+.text-resize-m {font-size:1em}
+.text-resize-s {font-size:0.8em}
+.text-resize-xs {font-size:0.5em}
+
+.text-no-wrap {white-space: nowrap}
+.text-no-decoration {text-decoration: none}
+.text-uppercase {text-transform: uppercase}
+.text-weight-300 {font-weight: 300}
+.text-weight-400 {font-weight: 400}
+.text-weight-bold {font-weight: bold}
+.text-line-l {line-height: 1.2em}
+.text-line-xl {line-height: 1.5em}
+.text-line-xxl {line-height: 2em}
+
+.text-left {text-align: left}
+.text-right {text-align: right}
+.text-center {text-align: center}
+
+.list-inline li {display: inline}
+
+.relative {position:relative}
+.full-width {width:100%}
+
+/* colors */
+
+.text-color-primary {color: #1d2e2f}
+.text-color-secondary {color: #394d54}
+.text-color-main {color: #373a39}
+.text-color-general {color: #707070}
+.text-color-white {color: #FFF}
+
+.bg-primary {
+    background-color: #1d2e2f
+}
+.bg-secondary {
+    background-color: #394d54
+}
+.bg-main {
+    background-color: #373a39
+}
+.bg-general {
+    background-color: #707070
+}
+.bg-hero {
+    background: #3b9098; /* Old browsers */ /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#3b9098), color-stop(50%,#2eb398), color-stop(100%,#4db76d)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg,  #3b9098 0%,#2eb398 50%,#4db76d 100%); /* Chrome10+,Safari5.1+ */ /* Opera 11.10+ */ /* IE10+ */
+    background: -webkit-linear-gradient(315deg, #3b9098 0%, #2eb398 50%, #4db76d 100%);
+    background: linear-gradient(135deg,  #3b9098 0%,#2eb398 50%,#4db76d 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b9098', endColorstr='#4db76d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+/* generic html styles */
+
 body {
-  padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+.btn {
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color:transparent;
+    font-size: inherit;
+    color: inherit;
+    padding: 5px 20px;
+    text-decoration: none;
 }
-
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
+.btn-large {
+    padding: 10px 40px;
 }
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
-}
-
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+.btn-primary {
+    background-color: #1d2e2f;
+    color: white;
 }
