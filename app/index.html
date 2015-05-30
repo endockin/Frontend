@@ -10,6 +10,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel='stylesheet' href='bower_components/normalize.css/normalize.css' />
+    <link rel='stylesheet' href='bower_components/fontawesome/css/font-awesome.css' />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -18,27 +19,27 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 </head>
 
-<body ng-app="VMFactoryApp" class="bg-secondary-alt">
+<body ng-app="VMFactoryApp" ng-controller="HomeController" class="bg-secondary-alt">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
     <header class="bg-secondary">
-        <nav class="main-container text-color-white pad-row" role="navigation">
-            <div class="col tab-div-50 pad-row">
+        <nav class="main-container main-nav text-color-white pad-row" role="navigation">
+            <div class="col mob-div-100 tab-div-50 pad-row mob-text-center">
                 <a class="navbar-brand text-color-white text-resize-xl text-no-decoration text-weight-300" href="#/">VM Factory</a>
             </div>
-            <div class="col tab-div-50">
+            <div class="col tab-div-50 menu-items">
                 <ul class="list-inline text-right text-uppercase text-weight-300 text-resize-s">
-                    <li class="active">
-                        <a href="#/" class="btn">Home</a>
+                    <li ng-class="menuClass('')" class="rounded">
+                        <a href="#/" class="btn"><i class="fa fa-2x fa-home btn-icon"></i><span>Home</span></a>
                     </li>
-                    <li>
-                        <a ng-href="#/about" class="btn">About</a>
+                    <li ng-class="menuClass('about')" class="rounded">
+                        <a ng-href="#/about" class="btn"><i class="fa fa-2x fa-cloud btn-icon"></i><span>About</span></a>
                     </li>
-                    <li>
-                        <a ng-href="#/" class="btn">Contact</a>
+                    <li ng-class="menuClass('contact')" class="rounded">
+                        <a ng-href="#/" class="btn"><i class="fa fa-2x fa-phone btn-icon"></i><span>Contact</span></a>
                     </li>
                 </ul>
             </div>
@@ -49,7 +50,7 @@
 
     <footer class="row pad-row text-color-white">
         <div class="main-container">
-            <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+            <p class="text-color-white">&copy;2015 VMFactory App</p>
         </div>
     </div>
 
