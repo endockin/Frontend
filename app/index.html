@@ -18,18 +18,18 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 </head>
 
-<body ng-app="VMFactoryApp">
+<body ng-app="VMFactoryApp" class="bg-secondary-alt">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <header class="bg-primary">
+    <header class="bg-secondary">
         <nav class="main-container text-color-white pad-row" role="navigation">
-            <div class="tab-div-50">
+            <div class="col tab-div-50 pad-row">
                 <a class="navbar-brand text-color-white text-resize-xl text-no-decoration text-weight-300" href="#/">VM Factory</a>
             </div>
-            <div class="tab-div-50">
+            <div class="col tab-div-50">
                 <ul class="list-inline text-right text-uppercase text-weight-300 text-resize-s">
                     <li class="active">
                         <a href="#/" class="btn">Home</a>
@@ -45,10 +45,10 @@
         </nav>
     </header>
 
-    <div ng-view=""></div>
+    <div ng-view="" class="bg-white"></div>
 
-    <div class="footer">
-        <div class="container">
+    <footer class="row pad-row text-color-white">
+        <div class="main-container">
             <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
         </div>
     </div>
