@@ -72,24 +72,24 @@ module.exports = function (grunt) {
                 port: 9000,
                 // Change this to '0.0.0.0' to access the server from outside.
                 hostname: 'localhost',
-                livereload: 35729
+                //livereload: 35729
             },
             livereload: {
                 options: {
                     open: true,
                     middleware: function (connect) {
                         return [
-              connect.static('.tmp'),
-              connect().use(
+                          connect.static('.tmp'),
+                          connect().use(
                                 '/bower_components',
                                 connect.static('./bower_components')
-              ),
-              connect().use(
+                          ),
+                          connect().use(
                                 '/app/styles',
                                 connect.static('./app/styles')
-              ),
-              connect.static(appConfig.app)
-            ];
+                          ),
+                          connect.static(appConfig.app)
+                        ];
                     }
                 }
             },
@@ -98,14 +98,14 @@ module.exports = function (grunt) {
                     port: 9001,
                     middleware: function (connect) {
                         return [
-              connect.static('.tmp'),
-              connect.static('test'),
-              connect().use(
+                          connect.static('.tmp'),
+                          connect.static('test'),
+                          connect().use(
                                 '/bower_components',
                                 connect.static('./bower_components')
-              ),
-              connect.static(appConfig.app)
-            ];
+                          ),
+                          connect.static(appConfig.app)
+                        ];
                     }
                 }
             },
@@ -125,9 +125,9 @@ module.exports = function (grunt) {
             },
             all: {
                 src: [
-          'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
-        ]
+                  'Gruntfile.js',
+                  '<%= yeoman.app %>/scripts/{,*/}*.js'
+                ]
             },
             test: {
                 options: {
@@ -143,11 +143,11 @@ module.exports = function (grunt) {
                 files: [{
                     dot: true,
                     src: [
-            '.tmp',
-            '<%= yeoman.dist %>/{,*/}*',
-            '!<%= yeoman.dist %>/.git{,*/}*'
-          ]
-        }]
+                        '.tmp',
+                        '<%= yeoman.dist %>/{,*/}*',
+                        '!<%= yeoman.dist %>/.git{,*/}*'
+                      ]
+                }]
             },
             server: '.tmp'
         },
@@ -166,7 +166,7 @@ module.exports = function (grunt) {
                     cwd: '.tmp/styles/',
                     src: '{,*/}*.css',
                     dest: '.tmp/styles/'
-        }]
+                }]
             },
             dist: {
                 files: [{
@@ -174,7 +174,7 @@ module.exports = function (grunt) {
                     cwd: '.tmp/styles/',
                     src: '{,*/}*.css',
                     dest: '.tmp/styles/'
-        }]
+                }]
             }
         },
 
@@ -206,11 +206,11 @@ module.exports = function (grunt) {
         filerev: {
             dist: {
                 src: [
-          '<%= yeoman.dist %>/scripts/{,*/}*.js',
-          '<%= yeoman.dist %>/styles/{,*/}*.css',
-          '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.dist %>/styles/fonts/*'
-        ]
+                  '<%= yeoman.dist %>/scripts/{,*/}*.js',
+                  '<%= yeoman.dist %>/styles/{,*/}*.css',
+                  '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+                  '<%= yeoman.dist %>/styles/fonts/*'
+                ]
             }
         },
 
@@ -341,20 +341,26 @@ module.exports = function (grunt) {
                     cwd: '<%= yeoman.app %>',
                     dest: '<%= yeoman.dist %>',
                     src: [
-            '*.{ico,png,txt}',
-            '.htaccess',
-            '*.html',
-            'views/{,*/}*.html',
-            'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
-          ]
-        }, {
-                    expand: true,
-                    cwd: '.tmp/images',
-                    dest: '<%= yeoman.dist %>/images',
-                    src: ['generated/*']
-        }]
-            },
+                        '*.{ico,png,txt}',
+                        '.htaccess',
+                        '*.html',
+                        'views/{,*/}*.html',
+                        'images/{,*/}*.{webp}',
+                        'styles/fonts/{,*/}*.*'
+                        ]
+                    }, {
+                        expand: true,
+                        cwd: '.tmp/images',
+                        dest: '<%= yeoman.dist %>/images',
+                        src: ['generated/*']
+                    }, {
+                        expand: true,
+                        dot: true,
+                        cwd: 'bower_components/fontawesome',
+                        src: ['fonts/*.*'],
+                        dest: '<%= yeoman.dist %>'
+                    }]
+                },
             styles: {
                 expand: true,
                 cwd: '<%= yeoman.app %>/styles',
@@ -366,8 +372,8 @@ module.exports = function (grunt) {
         // Run some tasks in parallel to speed up the build process
         concurrent: {
             server: [
-        'copy:styles'
-      ],
+                    'copy:styles'
+                  ],
             test: [
         'copy:styles'
       ],

@@ -29,6 +29,10 @@ angular
                 templateUrl: 'views/about.html',
                 controller: 'AboutCtrl'
             })
+            .when('/contact', {
+              templateUrl: 'views/contact.html',
+              controller: 'ContactCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -36,7 +40,6 @@ angular
     .controller('HomeController', function ($scope, $location) {
         $scope.menuClass = function (page) {
             var current = $location.path().substring(1);
-            console.log(page,current);
-            return page === current ? "active" : "";
+            return page === current ? 'active' : '';
         };
     });
