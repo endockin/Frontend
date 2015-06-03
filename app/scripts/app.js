@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc overview
- * @name cloudEApp
+ * @name VMFactoryApp
  * @description
- * # cloudEApp
+ * # VMFactoryApp
  *
  * Main module of the application.
  */
@@ -25,13 +25,13 @@ angular
                 templateUrl: 'views/main.html',
                 controller: 'MainCtrl'
             })
-            .when('/about', {
-                templateUrl: 'views/about.html',
-                controller: 'AboutCtrl'
+            .when('/features', {
+                templateUrl: 'views/features.html',
+                controller: 'FeaturesCtrl'
             })
-            .when('/contact', {
-              templateUrl: 'views/contact.html',
-              controller: 'ContactCtrl'
+            .when('/help', {
+              templateUrl: 'views/help.html',
+              controller: 'HelpCtrl'
             })
             .otherwise({
                 redirectTo: '/'

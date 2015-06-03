@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: ContactCtrl', function () {
+describe('Controller: HelpCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('cloudEApp'));
+  beforeEach(module('VMFactoryApp'));
 
-  var ContactCtrl,
+  var HelpCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    ContactCtrl = $controller('ContactCtrl', {
+    HelpCtrl = $controller('HelpCtrl', {
       $scope: scope
     });
   }));

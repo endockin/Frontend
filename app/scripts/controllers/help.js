@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name VMFactoryApp.controller:MainCtrl
+ * @name VMFactoryApp.controller:HelpCtrl
  * @description
- * # MainCtrl
+ * # HelpCtrl
  * Controller of the VMFactoryApp
  */
 angular.module('VMFactoryApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('HelpCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

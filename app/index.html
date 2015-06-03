@@ -32,14 +32,17 @@
             </div>
             <div class="col tab-div-50 menu-items">
                 <ul class="list-inline text-right text-uppercase text-weight-300 text-resize-s">
-                    <li ng-class="menuClass('')" class="rounded">
-                        <a href="#/" class="btn"><i class="fa fa-2x fa-home btn-icon"></i><span>Home</span></a>
+                    <li ng-class="menuClass('features')" class="rounded">
+                        <a href="#/features" class="btn"><i class="fa fa-2x fa-home btn-icon"></i><span>Features</span></a>
                     </li>
-                    <li ng-class="menuClass('about')" class="rounded">
-                        <a ng-href="#/about" class="btn"><i class="fa fa-2x fa-cloud btn-icon"></i><span>About</span></a>
+                    <li ng-class="menuClass('help')" class="rounded">
+                        <a ng-href="#/help" class="btn"><i class="fa fa-2x fa-cloud btn-icon"></i><span>Help</span></a>
                     </li>
-                    <li ng-class="menuClass('contact')" class="rounded">
-                        <a ng-href="#/contact" class="btn"><i class="fa fa-2x fa-phone btn-icon"></i><span>Contact</span></a>
+                    <li ng-class="menuClass('login')" class="rounded">
+                        <button ng-click="openLogin" class="btn"><i class="fa fa-2x fa-phone btn-icon"></i><span>Login</span></button>
+                    </li>
+                    <li ng-class="menuClass('signup')" class="rounded">
+                        <a ng-href="#/signup" class="btn"><i class="fa fa-2x fa-phone btn-icon"></i><span>Sign up</span></a>
                     </li>
                 </ul>
             </div>
@@ -85,8 +88,8 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/about.js"></script>
-    <script src="scripts/controllers/contact.js"></script>
+    <script src="scripts/controllers/features.js"></script>
+    <script src="scripts/controllers/help.js"></script>
     <!-- endbuild -->
 </body>
 
