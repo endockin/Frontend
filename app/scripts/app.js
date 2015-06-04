@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-    .module('VMFactoryApp', [
+	.module('VMFactoryApp', [
         'ngAnimate',
         'ngAria',
         'ngCookies',
@@ -17,29 +17,72 @@ angular
         'ngResource',
         'ngRoute',
         'ngSanitize',
-        'ngTouch'
+        'ngTouch',
+        'ui.router'
     ])
-    .config(function ($routeProvider) {
-        $routeProvider
-            .when('/', {
-                templateUrl: 'views/main.html',
-                controller: 'MainCtrl'
-            })
-            .when('/features', {
-                templateUrl: 'views/features.html',
-                controller: 'FeaturesCtrl'
-            })
-            .when('/help', {
-              templateUrl: 'views/help.html',
-              controller: 'HelpCtrl'
-            })
-            .otherwise({
-                redirectTo: '/'
-            });
-    })
-    .controller('HomeController', function ($scope, $location) {
-        $scope.menuClass = function (page) {
-            var current = $location.path().substring(1);
-            return page === current ? 'active' : '';
-        };
-    });
+	.config(function ($stateProvider, $urlRouterProvider) {
+		// For any unmatched url, redirect to /state1
+		$urlRouterProvider.otherwise('/');
+		$stateProvider
+			.state('/', {
+				url: '/',
+				templateUrl: 'views/main.html'
+			})
+			.state('/help', {
+				url: '/help',
+				templateUrl: 'views/help.html'
+			})
+			.state('/contact', {
+				url: '/contact',
+				templateUrl: 'views/contact.html'
+			})
+			.state('/features', {
+				url: '/features',
+				templateUrl: 'views/features.html'
+			})
+	})
+	.controller('HomeController', function ($scope, $location) {
+		// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+		if (!String.prototype.trim) {
+			(function() {
+				// Make sure we trim BOM and NBSP
+				var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+				String.prototype.trim = function() {
+					return this.replace(rtrim, '');
+				};
+			})();
+		}
+
+		[].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+			// in case the input is already filled..
+			if( inputEl.value.trim() !== '' ) {
+				classie.add( inputEl.parentNode, 'input--filled' );
+			}
+
+			// events:
+			inputEl.addEventListener( 'focus', onInputFocus );
+			inputEl.addEventListener( 'blur', onInputBlur );
+		} );
+
+		function onInputFocus( ev ) {
+			classie.add( ev.target.parentNode, 'input--filled' );
+		}
+
+		function onInputBlur( ev ) {
+			if( ev.target.value.trim() === '' ) {
+				classie.remove( ev.target.parentNode, 'input--filled' );
+			}
+		}
+	
+	
+		$scope.menuClass = function (page) {
+			var current = $location.path().substring(1);
+			return page === current ? 'active' : '';
+		};
+		$scope.isLoginOpen = false;
+		$scope.openLogin = function(){
+			console.log('clicked');
+			$scope.isLoginOpen = $scope.isLoginOpen ? false : true;
+			console.log($scope.isLoginOpen);
+		}
+	});

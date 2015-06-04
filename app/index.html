@@ -2,95 +2,113 @@
 <html class="no-js">
 
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel='stylesheet' href='bower_components/normalize.css/normalize.css' />
-    <link rel='stylesheet' href='bower_components/fontawesome/css/font-awesome.css' />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<!-- build:css(.) styles/vendor.css -->
+	<!-- bower:css -->
+	<link rel='stylesheet' href='bower_components/normalize.css/normalize.css' />
+	<link rel='stylesheet' href='bower_components/fontawesome/css/font-awesome.css' />
+	<!-- endbower -->
+	<!-- endbuild -->
+	<!-- build:css(.tmp) styles/main.css -->
+	<link rel="stylesheet" href="styles/main.css">
+	<!-- endbuild -->
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 </head>
 
 <body ng-app="VMFactoryApp" ng-controller="HomeController" class="bg-secondary-alt">
-    <!--[if lt IE 7]>
+	<!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <header class="bg-secondary">
-        <nav class="main-container main-nav text-color-white pad-row" role="navigation">
-            <div class="col mob-div-100 tab-div-50 pad-row mob-text-center">
-                <a class="navbar-brand text-color-white text-resize-xl text-no-decoration text-weight-300" href="#/">VM Factory</a>
-            </div>
-            <div class="col tab-div-50 menu-items">
-                <ul class="list-inline text-right text-uppercase text-weight-300 text-resize-s">
-                    <li ng-class="menuClass('features')" class="rounded">
-                        <a href="#/features" class="btn"><i class="fa fa-2x fa-home btn-icon"></i><span>Features</span></a>
-                    </li>
-                    <li ng-class="menuClass('help')" class="rounded">
-                        <a ng-href="#/help" class="btn"><i class="fa fa-2x fa-cloud btn-icon"></i><span>Help</span></a>
-                    </li>
-                    <li ng-class="menuClass('login')" class="rounded">
-                        <button ng-click="openLogin" class="btn"><i class="fa fa-2x fa-phone btn-icon"></i><span>Login</span></button>
-                    </li>
-                    <li ng-class="menuClass('signup')" class="rounded">
-                        <a ng-href="#/signup" class="btn"><i class="fa fa-2x fa-phone btn-icon"></i><span>Sign up</span></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+	<!-- Add your site or application content here -->
+	<header class="bg-secondary">
+		<nav class="main-container main-nav text-color-white pad-row" role="navigation">
+			<div class="col mob-div-100 tab-div-50 pad-row mob-text-center">
+				<a class="navbar-brand text-color-white text-resize-xl text-no-decoration text-weight-300" href="#/">VM Factory</a>
+			</div>
+			<div class="col tab-div-50 menu-items">
+				<ul class="list-inline text-right text-uppercase text-weight-300 text-resize-s">
+					<li ng-class="menuClass('features')" class="rounded">
+						<a href="#/features" class="btn"><i class="fa fa-2x fa-cogs btn-icon"></i><span>Features</span></a>
+					</li>
+					<li ng-class="menuClass('help')" class="rounded">
+						<a ng-href="#/help" class="btn"><i class="fa fa-2x fa-question btn-icon"></i><span>Help</span></a>
+					</li>
+					<li ng-class="menuClass('login')" class="rounded">
+						<button ng-click="openLogin()" class="btn text-uppercase"><i class="fa fa-2x fa-user btn-icon"></i><span>Login</span></button>
+						<form action="" ng-if="isLoginOpen" class="loginForm">
+							<h2>Kaede</h2>
+							<div class="input input--kaede">
+								<input class="input__field input__field--kaede" type="text" id="EmailField" />
+								<label class="input__label input__label--kaede" for="EmailField">
+									<span class="input__label-content input__label-content--kaede">Email</span>
+								</label>
+							</div>
+							<div class="input input--kaede">
+								<input class="input__field input__field--kaede" type="password" id="PasswordField" />
+								<label class="input__label input__label--kaede" for="PasswordField">
+									<span class="input__label-content input__label-content--kaede">Password</span>
+								</label>
+							</div>
+							<button type="submit" class="btn text-uppercase"><i class="fa fa-2x fa-arrow-right btn-icon"></i><span>Login</span>
 
-    <div ng-view="" class="bg-white"></div>
+						</form>
+					</li>
+					<li ng-class="menuClass('signup')" class="rounded">
+						<a ng-href="#/signup" class="btn"><i class="fa fa-2x fa-check-circle btn-icon"></i><span>Sign up</span></a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
 
-    <footer class="row pad-row text-color-white">
-        <div class="main-container">
-            <p class="text-color-white">&copy;2015 VMFactory App</p>
-        </div>
-    </div>
+	<div ui-view class="bg-white"></div>
+
+	<footer class="row pad-row text-color-white">
+		<div class="main-container">
+			<p class="text-color-white">&copy;2015 VMFactory App</p>
+		</div>
+		</div>
 
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <script>
-        ! function (A, n, g, u, l, a, r) {
-            A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
-                    (A[l].q = A[l].q || []).push(arguments)
-                }, A[l].l = +new Date, a = n.createElement(g),
-                r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
-        }(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+		<script>
+			! function (A, n, g, u, l, a, r) {
+				A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
+						(A[l].q = A[l].q || []).push(arguments)
+					}, A[l].l = +new Date, a = n.createElement(g),
+					r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+			}(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-XXXXX-X');
-        ga('send', 'pageview');
-    </script>
+			ga('create', 'UA-XXXXX-X');
+			ga('send', 'pageview');
+		</script>
 
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-messages/angular-messages.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+		<!-- build:js(.) scripts/vendor.js -->
+		<!-- bower:js -->
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.js"></script>
+		<script src="bower_components/angular-aria/angular-aria.js"></script>
+		<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+		<script src="bower_components/angular-messages/angular-messages.js"></script>
+		<script src="bower_components/angular-resource/angular-resource.js"></script>
+		<script src="bower_components/angular-route/angular-route.js"></script>
+		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+		<script src="bower_components/angular-touch/angular-touch.js"></script>
+		<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+		<!-- endbower -->
+		<!-- endbuild -->
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/features.js"></script>
-    <script src="scripts/controllers/help.js"></script>
-    <!-- endbuild -->
+		<!-- build:js({.tmp,app}) scripts/scripts.js -->
+		<script src="scripts/app.js"></script>
+		<script src="scripts/controllers/main.js"></script>
+		<script src="scripts/controllers/features.js"></script>
+		<script src="scripts/controllers/help.js"></script>
+		<!-- endbuild -->
 </body>
 
 </html>
