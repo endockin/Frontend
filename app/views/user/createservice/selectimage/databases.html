@@ -1,0 +1,14 @@
+
+
+<ul class="main-container">
+	<li ng-repeat="cnt in services['Databases']" class="row grid-sides">
+		<img ng-src="{{cnt.img}}" class="col div-15 tab-div-25 pad-sides">
+		<div class="col div-75 tab-div-50 pad-sides">
+			<h2>{{cnt.title}}</h2>
+			<p>{{cnt.description}}</p>
+		</div>
+		<div class="col div-10 tab-div-25 pad-sides text-right">
+			<a ui-sref="user.createservice.configureimage" class="btn btn-primary"><i class="fa fa-2x fa-check-circle-o btn-icon"></i><span>Select</span></a>
+		</div>
+	</li>
+</ul>

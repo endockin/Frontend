@@ -30,12 +30,15 @@ angular
             .state('presentation.contact', {url: '/contact',templateUrl: 'views/presentation/contact.html'})
             .state('presentation.signup', {url: '/signup',templateUrl: 'views/presentation/signup.html'})
             .state('presentation.features', {url: '/features',templateUrl: 'views/presentation/features.html'})
-            .state('user', {templateUrl: 'views/user.html', controller: 'UserCtrl'})
-            .state('user.dashboard', {url:'/dashboard', templateUrl: 'views/user/dashboard.html'})
-            .state('user.createservice', {url:'/createservice', templateUrl: 'views/user/create-service.html'})
+
+			.state('user', {templateUrl: 'views/user.html', controller: 'UserCtrl'})
+				.state('user.dashboard', {url:'/dashboard', templateUrl: 'views/user/dashboard.html'})
+				.state('user.createservice', {url:'/createservice', templateUrl: 'views/user/createservice.html', controller: 'CreateServiceCtrl'})
+					.state('user.createservice.selectimage', {url:'/selectimage/{category}', templateUrl: 'views/user/createservice/selectimage.html'})
+					.state('user.createservice.configureimage', {url:'/configureimage', templateUrl: 'views/user/createservice/configureimage.html'})
+					.state('user.createservice.cloudprovider', {url:'/cloudprovider', templateUrl: 'views/user/createservice/cloudprovider.html'});
     })
     .controller('HomeCtrl', function ($scope, $location, ngDialog) {
-
         $scope.menuClass = function (page) {
             var current = $location.path().substring(1);
             return page === current ? 'active' : '';
@@ -49,8 +52,13 @@ angular
 
     })
     .controller('UserCtrl', function($scope, $location){
-        $scope.menuClass = function (page) {
+		$scope.menuClass = function (page) {
             var current = $location.path().substring(1);
+			current = current.indexOf('/') >=0 ? current.substring(0,current.indexOf('/')) : current;
+			console.log(current);
             return page === current ? 'active' : '';
         };
+		$scope.globals = {
+			savedServiceLocation : 'user.createservice.selectimage'
+		};
     });

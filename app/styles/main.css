@@ -142,6 +142,7 @@ color-general:      #707070
 
 .pad-xlarge-sides {padding-left:40px;padding-right:40px}
 .pad-xlarge-left{padding-left:40px}
+.pad-xlarge-top{padding-top:40px}
 .padd-xlarge-right {padding-right:40px}
 .padd-xlarge-around {padding-right:40px}
 .grid-xlarge-sides {margin-left:-40px;margin-right:-40px}
@@ -151,6 +152,7 @@ color-general:      #707070
 .pad-xxlarge-sides {padding-left:40px;padding-right:40px}
 .pad-xxlarge-left{padding-left:40px}
 .padd-xxlarge-right {padding-right:40px}
+.padd-xxlarge-top {padding-top:40px}
 .padd-xxlarge-around {padding-right:40px}
 .grid-xxlarge-sides {margin-left:-40px;margin-right:-40px}
 
@@ -299,6 +301,10 @@ figure {
 	-webkit-transition: 0.3s;
 	transition: 0.3s;
 }
+.btn-primary {
+	background-color: #3b9098;
+	color: #fff;
+}
 .btn:focus {
 	outline: none;
 }
@@ -330,7 +336,7 @@ figure {
 }
 .btn > span,
 .btn .btn-icon {
-	padding: .5em 0;
+	padding: .4em 0;
 	-webkit-transition: -webkit-transform 0.3s;
 	transition: transform 0.3s;
 	-webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
@@ -533,6 +539,16 @@ figure {
 }
 
 
+.border-around {
+	border: 1px solid transparent
+}
+.border-white {
+	border-color: #fff;
+}
+.rounded-row {
+	border-radius: 40px;
+	overflow: hidden;
+}
 .nav-brand {
     font-family: "Arial Narrow";
     font-size: 1.5em;
@@ -644,9 +660,45 @@ figure {
 .user-menu .active a {
     background-color: rgba(255,255,255,.05);
 }
-.user-menu .menu-end {
-}
 
+.progress-step {
+	position: relative;
+	font-weight: 300;
+}
+.progress-step:before {
+	content: "";
+	position: absolute;
+	display: block;
+	top: -300%;
+	left: 0;
+	right: 0;
+	height: 50px;
+	background-color: #dadde0;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+}
+.progress-step.active {
+	font-weight: 400;
+}
+.progress-step.active:before {
+	background-color: #3b9098;
+}
+.progress-step:first-child:before {
+	border-radius: 25px 0 0 25px;
+	border-left: none;
+}
+.progress-step:last-child:before {
+	border-radius: 0 25px 25px 0;
+}
+.nav-tabs a {
+	text-decoration: none;
+	color: #1d2e2f;
+	padding: 20px 50px;
+	display: inline-block
+}
+.nav-tabs .active a{
+	border-bottom: 6px solid #3b9098;
+}
 @media (max-width: 480px) {
     .mob-text-left {text-align: left}
     .mob-text-right {text-align: right}
