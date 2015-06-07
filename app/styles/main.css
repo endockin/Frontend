@@ -96,6 +96,27 @@ color-general:      #707070
     display: table;
 }
 
+.flex-container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.flex-row {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+.flex-column {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
 /*general padding between columns*/
 .pad-sides {padding-left: 10px; padding-right: 10px}
 .pad-right {padding-right:10px}
@@ -175,6 +196,15 @@ color-general:      #707070
 
 .relative {position:relative}
 .full-width {width:100%}
+.full-height {height:100%}
+.full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
 
 .display-inline-block {display: inline-block; float: none}
 .display-block {display: block}
@@ -222,6 +252,14 @@ color-general:      #707070
     background: -webkit-linear-gradient(315deg, #3b9098 0%, #2eb398 50%, #4db76d 100%);
     background: linear-gradient(135deg,  #3b9098 0%,#2eb398 50%,#4db76d 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b9098', endColorstr='#4db76d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+.bg-side-menu {
+    background: #1d2e2f; /* Old browsers */ /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1d2e2f), color-stop(100%,#203527)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #1d2e2f 0%,#203527 100%); /* Chrome10+,Safari5.1+ */ /* Opera 11.10+ */ /* IE10+ */
+    background: -webkit-linear-gradient(top, #1d2e2f 0%, #203527 100%);
+    background: linear-gradient(to bottom,  #1d2e2f 0%,#203527 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d2e2f', endColorstr='#203527',GradientType=0 ); /* IE6-9 */
 }
 
 /* generic html styles */
@@ -495,6 +533,12 @@ figure {
 }
 
 
+.nav-brand {
+    font-family: "Arial Narrow";
+    font-size: 1.5em;
+    font-weight: normal;
+}
+
 .list-large-tick {
     list-style: none;
     margin: 0;
@@ -533,6 +577,76 @@ figure {
 	background-color: rgba(0,0,0,0.75);
 	z-index: -1;
 }
+
+
+.user-area {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+}
+.user-content {
+    width: 100%;
+}
+.user-menu {
+    width: 30%;
+    height: 100%;
+    max-width: 360px;
+    
+}
+.user-menu .main-nav {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    
+    width: 100%;
+    height: 100%;
+}
+.user-menu .nav-brand {
+    padding-left: 20%;
+}
+.user-menu .menu-items {
+    height: 100%;
+}
+.user-menu hr {
+    margin: 20px 20%;
+}
+.user-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.user-menu ul li {
+    padding: 10px 0;
+}
+.user-menu ul a {
+    padding-left: 20%;
+    line-height: 48px;
+    text-decoration: none;
+    color: #fff;
+    display: block;
+}
+.user-menu .active a {
+    background-color: rgba(255,255,255,.05);
+}
+.user-menu .menu-end {
+}
+
 @media (max-width: 480px) {
     .mob-text-left {text-align: left}
     .mob-text-right {text-align: right}

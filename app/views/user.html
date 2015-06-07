@@ -1,0 +1,39 @@
+<div class="full-screen user-area">
+    <header class="bg-side-menu user-menu">
+        <nav class="main-nav text-color-white pad-row" role="navigation">
+            <div class="pad-xxlarge-row nav-brand">
+                <a class="text-color-white text-resize-xl text-no-decoration text-weight-300" href="#/">VM Factory</a>
+            </div>
+            <div class="menu-items text-resize-l text-weight-300 text-uppercase">
+                <ul>
+                    <li ng-class="menuClass('createservice')">
+                        <a ui-sref="user.createservice">Create service</span></a>
+                    </li>
+                    <li ng-class="menuClass('dashboard')">
+                        <a ui-sref="user.dashboard">Dashboard</span></a>
+                    </li>
+                </ul>
+                <hr>
+                <ul>
+                    <li ng-class="menuClass('profile')">
+                        <a ui-sref="user.profile"></i><span>Profile</span></a>
+                    </li>
+                    <li ng-class="menuClass('features')">
+                        <a ui-sref="user.features"></i><span>Features</span></a>
+                    </li>
+                    <li ng-class="menuClass('documentation')">
+                        <a ui-sref="user.documentation"></i><span>Documentation</span></a>
+                    </li>
+                    <li ng-class="menuClass('help')">
+                        <a ui-sref="user.help"></i><span>Help</span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="menu-end">
+                <button class="btn">Sign out</button>
+            </div>
+        </nav>
+    </header>
+
+    <div ui-view class="bg-white user-content"></div>
+</div>
