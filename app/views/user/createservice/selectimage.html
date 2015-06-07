@@ -7,14 +7,13 @@
 </figure>
 <div class="row bg-light">
 	<ul class="list-inline text-center text-uppercase nav-tabs">
-		<li ng-repeat="items in services">
+		<li ng-repeat="items in services" ng-class="tabClass('{{items.Category}}')">
 			<a ui-sref="user.createservice.selectimage({category:items.Category})">{{items.Category}}</a>
 		</li>
 	</ul>
 </div>
-
 <ul class="main-container">
-	<li ng-repeat="item in services[serviceIndexes[category]].Repos" class="row grid-sides">
+	<li ng-repeat="item in services[serviceIndexes[servicesCategory]].Repos" class="row grid-sides">
 		<div class="col div-15 tab-div-25 pad-large-around">
 			<img ng-src="{{item.img}}" class="full-width">
 		</div>
@@ -23,7 +22,7 @@
 			<p>{{item.description}}</p>
 		</div>
 		<div class="col div-10 tab-div-25 pad-large-row text-right">
-			<a ui-sref="user.createservice.configureimage" class="btn btn-primary"><i class="fa fa-2x fa-check-circle-o btn-icon"></i><span>Select</span></a>
+			<a ui-sref="user.createservice.configureimage" ng-click="addImage(item.title)" class="btn btn-primary"><i class="fa fa-2x fa-check-circle-o btn-icon"></i><span>Select</span></a>
 		</div>
 	</li>
 </ul>
