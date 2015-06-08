@@ -1,28 +1,28 @@
 <figure class="pad-xxlarge-row text-center">
-	<div class="main-container pad-xlarge-top text-uppercase">
+	<div class="main-container tab-div-75 pad-xlarge-top text-uppercase text-resize-s">
 		<div class="progress-step active col mob-div-33">Select image</div>
 		<div class="progress-step col mob-div-33">Configure image</div>
 		<div class="progress-step col mob-div-33">Cloud provider</div>
 	</div>
 </figure>
 <div class="row bg-light">
-	<ul class="list-inline text-center text-uppercase nav-tabs">
-		<li ng-repeat="items in services" ng-class="tabClass('{{items.Category}}')">
-			<a ui-sref="user.createservice.selectimage({category:items.Category})">{{items.Category}}</a>
+	<ul class="list-inline text-center text-uppercase text-resize-s nav-tabs">
+		<li ng-repeat="items in services" ng-class="tabClass('{{items.categoryName}}')">
+			<a ui-sref="user.createservice.selectimage({category:items.categoryName})">{{items.categoryName}}</a>
 		</li>
 	</ul>
 </div>
 <ul class="main-container">
-	<li ng-repeat="item in services[serviceIndexes[servicesCategory]].Repos" class="row grid-sides">
-		<div class="col div-15 tab-div-25 pad-large-around">
-			<img ng-src="{{item.img}}" class="full-width">
+	<li ng-repeat="item in services[serviceIndexes[servicesCategory]].images" class="row grid-sides">
+		<div class="col div-20 tab-div-25 pad-xlarge-around">
+			<img ng-src="{{item.imageLogo}}" class="full-width">
 		</div>
-		<div class="col div-75 tab-div-50 pad-sides">
-			<h2>{{item.title}}</h2>
-			<p>{{item.description}}</p>
+		<div class="col div-60 tab-div-50 pad-sides">
+			<h2>{{item.imageName}}</h2>
+			<p>{{item.imageDescription}}</p>
 		</div>
-		<div class="col div-10 tab-div-25 pad-large-row text-right">
-			<a ui-sref="user.createservice.configureimage" ng-click="addImage(item.title)" class="btn btn-primary"><i class="fa fa-2x fa-check-circle-o btn-icon"></i><span>Select</span></a>
+		<div class="col div-20 tab-div-25 pad-xxlarge-top text-right">
+			<a ui-sref="user.createservice.configureimage" ng-click="addImage(item.imageName)" class="btn btn-primary"><i class="fa fa-check-circle-o btn-icon"></i><span>Select</span></a>
 		</div>
 	</li>
 </ul>

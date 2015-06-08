@@ -1,0 +1,141 @@
+[{
+	"categoryId": 1,
+	"categoryName": "Databases",
+	"images": [{
+		"imageId": 1,
+		"imageName": "MySQL",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 1
+	}, {
+		"imageId": 2,
+		"imageName": "MongoDB",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 1
+	}, {
+		"imageId": 3,
+		"imageName": "Postgres",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 1
+	}]
+}, {
+	"categoryId": 2,
+	"categoryName": "Application Servers",
+	"images": [{
+		"imageId": 8,
+		"imageName": "Django",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 2
+	}, {
+		"imageId": 9,
+		"imageName": "Tomcat",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 2
+	}, {
+		"imageId": 10,
+		"imageName": "Bamboo server",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 2
+	}, {
+		"imageId": 11,
+		"imageName": "Jetty",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 2
+	}, {
+		"imageId": 12,
+		"imageName": "Chef-Server",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 2
+	}, {
+		"imageId": 13,
+		"imageName": "Php MyAdmin",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 2
+	}, {
+		"imageId": 14,
+		"imageName": "Websphere Liberty",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 2
+	}]
+}, {
+	"categoryId": 3,
+	"categoryName": "Operating systems",
+	"images": [{
+		"imageId": 4,
+		"imageName": "Ubuntu",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 3
+	}, {
+		"imageId": 5,
+		"imageName": "Fedora",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 3
+	}, {
+		"imageId": 6,
+		"imageName": "Debian",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 3
+	}, {
+		"imageId": 7,
+		"imageName": "CentOS",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 3
+	}]
+}, {
+	"categoryId": 4,
+	"categoryName": "Trainings",
+	"images": [{
+		"imageId": 15,
+		"imageName": "Jenkins",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 4
+	}, {
+		"imageId": 16,
+		"imageName": "Sonar",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 4
+	}, {
+		"imageId": 17,
+		"imageName": "GIT",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 4
+	}]
+}, {
+	"categoryId": 5,
+	"categoryName": "Employee role",
+	"images": [{
+		"imageId": 18,
+		"imageName": "Java developer",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 5
+	}, {
+		"imageId": 19,
+		"imageName": "Manual tester",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 5
+	}, {
+		"imageId": 20,
+		"imageName": "Automation tester",
+		"imageDescription": "Dummy description",
+		"imageLogo": "https://www.mysql.com/common/logos/logo-mysql-110x57.png",
+		"categoryId": 5
+	}]
+}]

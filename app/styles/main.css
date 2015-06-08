@@ -43,6 +43,7 @@ color-general:      #707070
     .tab-div-25 {width: 25%}
     .tab-div-33 {width: 33.333%}
     .tab-div-50 {width: 50%}
+    .tab-div-60 {width: 50%}
     .tab-div-66 {width: 66.666%}
     .tab-div-75 {width: 75%}
     .tab-div-100 {width: 100%}
@@ -142,19 +143,19 @@ color-general:      #707070
 
 .pad-xlarge-sides {padding-left:40px;padding-right:40px}
 .pad-xlarge-left{padding-left:40px}
-.pad-xlarge-top{padding-top:40px}
-.padd-xlarge-right {padding-right:40px}
-.padd-xlarge-around {padding-right:40px}
+.pad-xlarge-top{padding-top: 40px;}
+.pad-xlarge-right {padding-right:40px}
+.pad-xlarge-around {padding:40px}
 .grid-xlarge-sides {margin-left:-40px;margin-right:-40px}
 
 /*xxl padding*/
 
-.pad-xxlarge-sides {padding-left:40px;padding-right:40px}
-.pad-xxlarge-left{padding-left:40px}
-.padd-xxlarge-right {padding-right:40px}
-.padd-xxlarge-top {padding-top:40px}
-.padd-xxlarge-around {padding-right:40px}
-.grid-xxlarge-sides {margin-left:-40px;margin-right:-40px}
+.pad-xxlarge-sides {padding-left:80px;padding-right:80px}
+.pad-xxlarge-left{padding-left:80px}
+.pad-xxlarge-right {padding-right:80px}
+.pad-xxlarge-top {padding-top:80px}
+.pad-xxlarge-around {padding-right:80px}
+.grid-xxlarge-sides {margin-left:-80px;margin-right:-80px}
 
 .pad-top {padding-top:10px}
 .pad-large-top{padding-top:20px}
@@ -332,7 +333,7 @@ figure {
 }
 .btn > span,
 .btn .btn-icon {
-	padding: .4em 0;
+	padding: .8em 0;
 	-webkit-transition: -webkit-transform 0.3s;
 	transition: -webkit-transform 0.3s;
 	transition: transform 0.3s;
@@ -340,7 +341,7 @@ figure {
 	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
 }
 .btn > span {
-	padding: 1em 2em;
+	padding: .5em 2em;
 }
 .btn:hover::before {
 	-webkit-animation: anim-naira-1 0.3s forwards ease-in;
@@ -500,7 +501,7 @@ figure {
 	position: relative;
 	display: block;
 	width: 100%;
-	padding: 1.5em 0;
+	padding: .65em;
 }
 
 .input__field--kaede:focus,
@@ -593,9 +594,9 @@ figure {
     -webkit-flex-flow: row nowrap;
     -ms-flex-flow: row nowrap;
     flex-flow: row nowrap;
-    -webkit-align-content: stretch;
-	-ms-flex-line-pack: stretch;
-	align-content: stretch;
+	-webkit-align-content: stretch;
+	        -ms-flex-line-pack: stretch;
+	        align-content: stretch;
 }
 .user-content {
     width: 100%;
@@ -626,20 +627,22 @@ figure {
 }
 .user-menu .nav-brand {
     padding-left: 20%;
-	-webkit-box-flex: 0;
 	-webkit-flex: 0 1 auto;
+	-webkit-box-flex: 0;
 	-ms-flex: 0 1 auto;
 	flex: 0 1 auto;
 }
 .user-menu .menu-items {
     height: 100%;
-	-webkit-box-flex: 0;
 	-webkit-flex: 0 1 auto;
+	-webkit-box-flex: 0;
 	-ms-flex: 0 1 auto;
 	flex: 0 1 auto;
 }
 .user-menu hr {
     margin: 20px 20%;
+	border: none;
+	border-bottom: 1px solid rgba(255,255,255,.5);
 }
 .user-menu ul {
     list-style: none;
@@ -647,7 +650,7 @@ figure {
     padding: 0;
 }
 .user-menu ul li {
-    padding: 10px 0;
+    padding: 0;
 }
 .user-menu ul a {
     padding-left: 20%;
@@ -660,8 +663,8 @@ figure {
     background-color: rgba(255,255,255,.05);
 }
 .user-menu .menu-end {
-	-webkit-box-flex: 0;
 	-webkit-flex: 0 1 auto;
+	-webkit-box-flex: 0;
 	-ms-flex: 0 1 auto;
 	flex: 0 1 auto;
 }
@@ -674,10 +677,10 @@ figure {
 	content: "";
 	position: absolute;
 	display: block;
-	top: -300%;
+	top: -200%;
 	left: 0;
 	right: 0;
-	height: 50px;
+	height: 30px;
 	background-color: #dadde0;
 	border-left: 1px solid #fff;
 	border-right: 1px solid #fff;
@@ -689,11 +692,11 @@ figure {
 	background-color: #3b9098;
 }
 .progress-step:first-child:before {
-	border-radius: 25px 0 0 25px;
+	border-radius: 15px 0 0 15px;
 	border-left: none;
 }
 .progress-step:last-child:before {
-	border-radius: 0 25px 25px 0;
+	border-radius: 0 15px 15px 0;
 }
 .nav-tabs a {
 	text-decoration: none;
@@ -737,4 +740,11 @@ figure {
     .mob-clear{clear:left}
     .tab-clear{clear: left}
     .sd-clear{clear: left}
+	
+	.nav-tabs a {
+		padding: 10px 20px;
+	}
+	.nav-tabs .active a {
+		border-bottom-width: 4px;
+	}
 }
