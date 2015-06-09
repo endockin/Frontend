@@ -1,0 +1,30 @@
+<div class="main-container pad-xlarge-row">
+	<div class="row pad-large-row">
+		<div class="col tab-div-25">Image:</div>
+		<div class="col tab-div-75">{{config.repoName}}</div>
+	</div>
+	<div class="row pad-large-row">
+		<div class="col tab-div-25"><label for="ServiceName">Service Name</label></div>
+		<div class="col tab-div-75"><input type="text" id="ServiceName" class="input tab-div-75" ng-model="config.serviceName" /></div>
+	</div>
+	<div class="row pad-large-row">
+		<div class="col tab-div-25"><label for="Ports">Ports</label></div>
+		<div class="col tab-div-75"><input type="text" id="Ports" class="input tab-div-75" ng-model="config.ports" /></div>
+	</div>
+	<div class="row pad-large-row">
+		<div class="col tab-div-25"><label for="NumberOfContainers">Number of containers</label></div>
+		<div class="col tab-div-75"><input type="number" id="NumberOfContainers" class="input tab-div-15" ng-model="config.numberOfContainers" /></div>
+	</div>
+	<div class="row pad-large-row">
+		<div class="col tab-div-25"><label for="Memory">Memory</label></div>
+		<div class="col tab-div-75"><input type="number" id="Memory" class="input tab-div-15" ng-model="config.memory" /></div>
+	</div>
+	<div class="row pad-large-row">
+		<div class="col tab-div-25"><label for="CPUshares">CPU shares</label></div>
+		<div class="col tab-div-75"><input type="number" id="CPUshares" class="input tab-div-15" ng-model="config.CPUshares" /></div>
+	</div>
+	<div class="row pad-large-row">
+		<div class="col tab-div-25"><label for="DiskSpace">Disk Space</label></div>
+		<div class="col tab-div-75"><input type="number" id="DiskSpace" class="input tab-div-15" ng-model="config.diskSpace" /></div>
+	</div>
+</div>

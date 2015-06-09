@@ -529,6 +529,15 @@ figure {
 	}
 }
 
+.table {
+	text-align: left;
+}
+.table th, .table td {
+	padding: 10px 20px;
+}
+.table th {
+	background-color: #f1f5f8
+}
 
 .border-around {
 	border: 1px solid transparent

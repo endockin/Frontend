@@ -8,48 +8,18 @@
 <div class="row bg-light">
 	<div class="main-container">
 		<ul class="list-inline text-left text-uppercase nav-tabs grid-large-sides">
-			<li ng-repeat="items in configCategories" ng-class="tabClass('{{items.Category}}')">
-				<a ui-sref="user.createservice.configureimage({category:items.Category})">{{items.Category}}</a>
+			<li ng-repeat="items in configCategories" ng-class="tabClass('{{items.state}}')">
+				<a ui-sref=".{{items.state}}">{{items.Category}}</a>
 			</li>
 		</ul>
 	</div>
 </div>
 
 
-<div class="main-container pad-xlarge-row">
-	<div class="row pad-large-row">
-		<div class="col tab-div-25">Image:</div>
-		<div class="col tab-div-75">{{config.repoName}}</div>
-	</div>
-	<div class="row pad-large-row">
-		<div class="col tab-div-25"><label for="ServiceName">Service Name</label></div>
-		<div class="col tab-div-75"><input type="text" id="ServiceName" class="input tab-div-75" /></div>
-	</div>
-	<div class="row pad-large-row">
-		<div class="col tab-div-25"><label for="Ports">Ports</label></div>
-		<div class="col tab-div-75"><input type="text" id="Ports" class="input tab-div-75" /></div>
-	</div>
-	<div class="row pad-large-row">
-		<div class="col tab-div-25"><label for="NumberOfContainers">Number of containers</label></div>
-		<div class="col tab-div-75"><input type="number" id="NumberOfContainers" class="input tab-div-15" /></div>
-	</div>
-	<div class="row pad-large-row">
-		<div class="col tab-div-25"><label for="Memory">Memory</label></div>
-		<div class="col tab-div-75"><input type="number" id="Memory" class="input tab-div-15" /></div>
-	</div>
-	<div class="row pad-large-row">
-		<div class="col tab-div-25"><label for="CPUshares">CPU shares</label></div>
-		<div class="col tab-div-75"><input type="number" id="CPUshares" class="input tab-div-15" /></div>
-	</div>
-	<div class="row pad-large-row">
-		<div class="col tab-div-25"><label for="DiskSpace">Disk Space</label></div>
-		<div class="col tab-div-75"><input type="number" id="DiskSpace" class="input tab-div-15" /></div>
-	</div>
-	
-</div>
+<div ui-view></div>
 
 
 <div class="row text-center pad-xlarge-row">
-	<a ui-sref="^.selectimage" class="btn btn-primary"><i class="fa fa-arrow-left btn-icon"></i><span>Previous step</span></a>
+	<a ui-sref="user.createservice.selectimage" class="btn btn-primary"><i class="fa fa-arrow-left btn-icon"></i><span>Previous step</span></a>
 	<a ui-sref="^.cloudprovider" class="btn btn-primary"><i class="fa fa-arrow-right btn-icon"></i><span>Next step</span></a>
 </div>

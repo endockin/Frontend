@@ -35,8 +35,10 @@ angular
 				.state('user.dashboard', {url:'/dashboard', templateUrl: 'views/user/dashboard.html'})
 				.state('user.createservice', {url:'/createservice', templateUrl: 'views/user/createservice.html', controller: 'CreateServiceCtrl'})
 					.state('user.createservice.selectimage', {url:'/selectimage/{category}', templateUrl: 'views/user/createservice/selectimage.html', controller: 'SelectImageCtrl'})
-					.state('user.createservice.configureimage', {url:'/configureimage/{category}', templateUrl: 'views/user/createservice/configureimage.html', controller: 'ConfigureImageCtrl'})
-					.state('user.createservice.cloudprovider', {url:'/cloudprovider/{category}', templateUrl: 'views/user/createservice/cloudprovider.html', controller: 'CloudProviderCtrl'});
+					.state('user.createservice.configureimage', {url:'/configureimage', templateUrl: 'views/user/createservice/configureimage.html', controller: 'ConfigureImageCtrl'})
+					.state('user.createservice.configureimage.serviceconfiguration', {url:'/serviceconfiguration', templateUrl: 'views/user/createservice/configureimage/serviceconfiguration.html'})
+					.state('user.createservice.configureimage.environmentvariables', {url:'/environmentvariables', templateUrl: 'views/user/createservice/configureimage/environmentvariables.html'})
+					.state('user.createservice.cloudprovider', {url:'/cloudprovider', templateUrl: 'views/user/createservice/cloudprovider.html', controller: 'CloudProviderCtrl'});
     })
     .controller('HomeCtrl', function ($scope, $location, ngDialog) {
         $scope.menuClass = function (page) {
@@ -57,4 +59,48 @@ angular
 			current = current.indexOf('/') >=0 ? current.substring(0,current.indexOf('/')) : current;
             return page === current ? 'active' : '';
         };
+		$scope.userData = {
+			images: [
+				{
+					id:'image1',
+					name:'Something awesome',
+					url:'http://cloudy.com/20938kj1p2o389lhsd897o2i34',
+					deployed: true,
+					status:'Running',
+					since:'20.03.2015 15:00',
+					cost: '10$',
+					schedule: '20.04.2015 15:00'
+				},
+				{
+					id:'image2',
+					name:'Second awesome',
+					url:'http://cloudy.com/20938kj1p2o389lhsd897o2i34',
+					deployed: true,
+					status:'Running',
+					since:'20.03.2015 15:00',
+					cost: '10$',
+					schedule: '20.04.2015 15:00'
+				},
+				{
+					id:'image3',
+					name:'Can\'t get enough',
+					url:'http://cloudy.com/20938kj1p2o389lhsd897o2i34',
+					deployed: true,
+					status:'Running',
+					since:'20.03.2015 15:00',
+					cost: '10$',
+					schedule: '20.04.2015 15:00'
+				},
+				{
+					id:'image4',
+					name:'Glory to the Spaghetti monster',
+					url:'http://cloudy.com/20938kj1p2o389lhsd897o2i34',
+					deployed: true,
+					status:'Running',
+					since:'20.03.2015 15:00',
+					cost: '10$',
+					schedule: '20.04.2015 15:00'
+				}
+			]
+		};
     });

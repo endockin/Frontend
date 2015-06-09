@@ -1,1 +1,29 @@
-<h1>Dashboard</h1>
+<main class="pad-large-sides">
+	<h1>Dashboard</h1>
+	<table class="full-width table grid-large-sides">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>URL</th>
+				<th>Deployed</th>
+				<th>Status</th>
+				<th>Since</th>
+				<th>Cost</th>
+				<th>Schedule</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in userData.images">
+				<td>{{item.name}}</td>
+				<td>{{item.url}}</td>
+				<td>{{item.deployed}}</td>
+				<td>{{item.status}}</td>
+				<td>{{item.since}}</td>
+				<td>{{item.cost}}</td>
+				<td>{{item.schedule}}</td>
+				<td><button class="btn btn-primary"><i class="fa fa-play btn-icon pad-small-sides"></i><span>Start</span></button></td>
+			</tr>
+		</tbody>
+	</table>
+</main>
