@@ -47,9 +47,13 @@
 					<input type="datetime-local" ng-model="item.schedule" class="input">
 				</td>
 				<td>
+<!--
 					<button class="btn btn-small btn-primary" ng-if="!item.running"><i class="fa fa-play btn-icon"></i><span>Start now</span>
 					</button>
 					<button class="btn btn-small btn-standout" ng-if="item.running"><i class="fa fa-stop btn-icon"></i><span>Stop now</span>
+					</button>
+-->
+					<button class="btn btn-small btn-standout" ng-if="item.running"><i class="fa fa-stop btn-icon"></i><span>Delete</span>
 					</button>
 				</td>
 			</tr>

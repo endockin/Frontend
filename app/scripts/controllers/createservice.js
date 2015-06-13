@@ -1,22 +1,32 @@
 'use strict';
 
 angular.module('VMFactoryApp')
-	.controller('CreateServiceCtrl', function ($scope, $state, $location, $http) {
-		$scope.config = {
-			cloud:null,
-			repoName:null,
-			id:'NewRepo',
-			numberOfContainers:1,
-			memory:256,
-			CPUshares:1,
-			diskSpace:512
-		};
-		$scope.addImage = function (name) {
-			$scope.config.repoName = name;
-		};
-		
-		$http.jsonp('http://172.16.0.200:8080/api/category?callback=JSON_CALLBACK').success(function (data) {
-//		$http.get('/mock/createservicereal.json').success(function (data) {
+	.controller('CreateServiceCtrl', function ($rootScope, $scope, $state, $location, $http) {
+	$scope.config = {
+		cloud: null,
+		repoName: null,
+		id: 'NewRepo',
+		numberOfContainers: 1,
+		memory: 256,
+		CPUshares: 1,
+		diskSpace: 512
+	};
+	$scope.addImage = function (name) {
+		$scope.config.id = name;
+	};
+	//		$http.jsonp('http://172.16.0.200:8080/api/category?callback=JSON_CALLBACK').success(function (data) {
+	//		$http.get('/mock/createservicereal.json').success(function (data) {
+	//		$httpProvider.defaults.headers.common['X-Patron-Api-Key'] = $rootScope.token;
+	$http({
+			url: $rootScope.ip + '/api/category',
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-Patron-Api-Key': $rootScope.token
+			},
+			dataType: 'application/json',
+			crossDomain: true
+		}).success(function (data) {
 			$scope.services = data;
 			$scope.serviceIndexes = (function () {
 				var tmp = {};
@@ -37,7 +47,7 @@ angular.module('VMFactoryApp')
 		};
 		if (!$scope.config.repoName) {
 			$state.go('user.createservice');
-		} 
+		}
 	})
 	.controller('SelectImageCtrl', function ($scope, $state) {
 		$scope.servicesCategory = $state.params.category;
@@ -48,7 +58,7 @@ angular.module('VMFactoryApp')
 				$state.go('user.createservice.cloudprovider');
 			}
 		};
-		if ($scope.config.repoName) {
+		if ($scope.config.id) {
 			$state.go('.serviceconfiguration');
 		}
 		$scope.configCategories = [
@@ -58,7 +68,7 @@ angular.module('VMFactoryApp')
 			}
 		];
 	})
-	.controller('CloudProviderCtrl', function ($scope) {
+	.controller('CloudProviderCtrl', function ($rootScope, $scope, $http) {
 		$scope.clouds = [
 			{
 				id:'cloud1',
@@ -84,22 +94,37 @@ angular.module('VMFactoryApp')
 		];
 		$scope.selectedCloudIndex = null;
 		$scope.config.cloud = $scope.clouds[$scope.selectedCloudIndex];
-		$scope.saveImage = function(){
-			console.log($scope.config);
-			
-			//pseudo save :)
-			
-			$scope.userData.images.push(
-				{
-					id:$scope.config.id,
-					name:$scope.config.serviceName,
-					url:$scope.config.cloud.url+$scope.config.id,
-					deployed: false,
-					status:'stopped',
-					since:'-',
-					cost: '-',
-					schedule: '-'
+	
+		$http({
+				url: $rootScope.ip + '/api/fleet',
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-Patron-Api-Key': $rootScope.token
+				},
+				data: {
+					  blueprintName: $scope.config.id,
+					  cpuPerShip: $scope.config.CPUshares,
+					  diskPerShip: $scope.config.diskSpace,
+					  memoryPerShip: $scope.config.memory,
+					  name: $scope.config.serviceName,
+					  numberOfShips: $scope.config.numberOfContainers
+				},
+				dataType: 'application/json'
+			}).success(function(data){
+			$scope.services = data;
+			$scope.serviceIndexes = (function () {
+				var tmp = {};
+				for (var i = 0, l = data.length; i < l; i++) {
+					tmp[data[i].name] = i;
 				}
-			);
-		};
+				return tmp;
+			}());
+			if ($state.current.name === 'user.createservice') {
+				$state.go('.selectimage', {
+					category: data[0].name
+				});
+			}
+		});
+	
 	});
