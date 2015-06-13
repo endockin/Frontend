@@ -1,13 +1,14 @@
-<main class="pad-large-sides">
-	<h1>Dashboard</h1>
-	<table class="full-width table grid-large-sides">
+<main>
+	<div class="bg-hero pad-xxlarge-row pad-large-sides text-color-white text-resize-xxl text-uppercase text-weight-400">
+		Fleet Command
+	</div>
+	<table class="full-width table">
 		<thead>
 			<tr>
 				<th>Name</th>
 				<th>URL</th>
 				<th>Deployed</th>
 				<th>Status</th>
-				<th>Since</th>
 				<th>Cost</th>
 				<th>Schedule</th>
 				<th></th>
@@ -16,14 +17,17 @@
 		<tbody>
 			<tr ng-repeat="item in userData.images">
 				<td>{{item.name}}</td>
-				<td>{{item.url}}</td>
+				<td><a href="#">{{item.url}}</a></td>
 				<td>{{item.deployed}}</td>
-				<td>{{item.status}}</td>
-				<td>{{item.since}}</td>
+				<td>{{item.status}}<br>{{item.since}}</td>
 				<td>{{item.cost}}</td>
 				<td>{{item.schedule}}</td>
-				<td><button class="btn btn-primary"><i class="fa fa-play btn-icon pad-small-sides"></i><span>Start</span></button></td>
+				<td><button class="btn btn-small btn-primary"><i class="fa fa-play btn-icon"></i><span>Start</span></button></td>
 			</tr>
 		</tbody>
 	</table>
+	<div class="pad-large-around">
+		<button type="button" class="btn btn-primary"><i class="fa fa-play btn-icon"></i><span>Start all</span></button>
+		<button type="button" class="btn btn-standout"><i class="fa fa-stop btn-icon"></i><span>Stop all</span></button>
+	</div>
 </main>

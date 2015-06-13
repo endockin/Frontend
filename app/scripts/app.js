@@ -37,7 +37,6 @@ angular
 					.state('user.createservice.selectimage', {url:'/selectimage/{category}', templateUrl: 'views/user/createservice/selectimage.html', controller: 'SelectImageCtrl'})
 					.state('user.createservice.configureimage', {url:'/configureimage', templateUrl: 'views/user/createservice/configureimage.html', controller: 'ConfigureImageCtrl'})
 					.state('user.createservice.configureimage.serviceconfiguration', {url:'/serviceconfiguration', templateUrl: 'views/user/createservice/configureimage/serviceconfiguration.html'})
-					.state('user.createservice.configureimage.environmentvariables', {url:'/environmentvariables', templateUrl: 'views/user/createservice/configureimage/environmentvariables.html'})
 					.state('user.createservice.cloudprovider', {url:'/cloudprovider', templateUrl: 'views/user/createservice/cloudprovider.html', controller: 'CloudProviderCtrl'});
     })
     .controller('HomeCtrl', function ($scope, $location, ngDialog) {

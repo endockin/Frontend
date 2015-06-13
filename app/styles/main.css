@@ -226,6 +226,7 @@ color-general:      #707070
 .text-color-main {color: #373a39}
 .text-color-general, p {color: #707070}
 .text-color-white {color: #FFF}
+.text-color-standout {color: #e14f4f}
 
 .bg-primary {
     background-color: #3b9098
@@ -298,10 +299,7 @@ figure {
 	-webkit-transition: 0.3s;
 	transition: 0.3s;
 }
-.btn-primary {
-	background-color: #3b9098;
-	color: #fff;
-}
+
 .btn:focus {
 	outline: none;
 }
@@ -410,10 +408,48 @@ figure {
 	transform: translate3d(0, 100%, 0);
 }
 
-.btn-primary {
-    background-color: #1d2e2f;
-    color: white;
+/* button sizes */
+
+.btn-small span {
+	padding: 5px 10px;
+	font-size: .8em;
 }
+.btn-small .btn-icon {
+	padding: 10px;
+	font-size: .8em;
+}
+
+/* different color buttons */
+
+.btn-primary {
+    background-color: #3b9098;
+	color: #fff;
+}
+.btn-primary::before {
+	background-color: #327980;
+}
+.btn-secondary {
+    background-color: #193239;
+	color: #fff;
+}
+.btn-secondary-alt {
+    background-color: #394d54;
+	color: #fff;
+}
+.btn-standout {
+    background-color: #e14f4f;
+	color: #fff;
+}
+.btn-standout::before {
+	background-color: #c74646;
+}
+.btn-light {
+    background-color: #f1f5f8;
+}
+.btn-white {
+    background-color: #FFFFFF
+}
+
 .btn-border-white {
 	border: 1px solid #fff;
 	color: #fff;
@@ -534,9 +570,12 @@ figure {
 }
 .table th, .table td {
 	padding: 10px 20px;
+	border-bottom: 1px solid #dadde0;
+	height: 80px;
 }
 .table th {
-	background-color: #f1f5f8
+	background-color: #f1f5f8;
+	border-bottom-width:2px;
 }
 
 .border-around {

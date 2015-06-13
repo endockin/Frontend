@@ -25,12 +25,12 @@
 			<p>{{item.description}}</p>
 		</div>
 		<div class="col div-20 tab-div-25 pad-xxlarge-top text-right">
-			<input type="radio" id="{{item.id}}" name="Cloud providers" ng-model="selectedCloudIndex" value="{{clouds.indexOf(item)}}">
+			<input type="radio" id="{{item.id}}" name="Cloud providers" ng-model="config.cloud" value="{{item.id}}">
 		</div>
 	</li>
 </ul>
 
 <div class="row text-center pad-xlarge-row">
-	<a ui-sref="^.configureimage" class="btn btn-primary"><i class="fa fa-arrow-left btn-icon"></i><span>Previous step</span></a>
-	<a ui-sref="user.dashboard" class="btn btn-primary" ng-click="saveImage()"><i class="fa fa-save btn-icon"></i><span>Create Service</span></a>
+	<a ui-sref="^.configureimage" class="btn btn-secondary"><i class="fa fa-arrow-left btn-icon"></i><span>Previous step</span></a>
+	<a ui-sref="user.dashboard" class="btn btn-secondary" ng-click="saveImage()"><i class="fa fa-save btn-icon"></i><span>Create Service</span></a>
 </div>
