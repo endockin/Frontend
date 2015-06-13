@@ -598,7 +598,7 @@ a:hover {
 	overflow: hidden;
 }
 .nav-brand {
-    font-family: "Arial Narrow";
+    font-family: "Arial Narrow", sans-serif;
     font-size: 1.5em;
     font-weight: normal;
 }

@@ -27,15 +27,15 @@
 				<td>{{item.name}}
 					<br> <small><a href="#">details</a></small>
 				</td>
-				<td><div ng-repeat="url in item.url"><a href="#" ng-href="url">{{url}}</div></a>
+				<td><div ng-repeat="url in item.url"><a ng-href="http://{{url}}">{{url}}</div></a>
 				</td>
 				<td class="text-center">
-					<i class="fa fa-lg fa-check text-color-primary" ng-if="item.deployed"></i>
-					<i class="fa fa-lg fa-remove text-color-standout" ng-if="!item.deployed"></i>
+					<i class="fa fa-lg fa-check text-color-primary" ng-if="!item.deployed"></i>
+					<i class="fa fa-lg fa-remove text-color-standout" ng-if="item.deployed"></i>
 				</td>
 				<td>
-					<strong ng-if="item.running">Running</strong>
-					<strong ng-if="!item.running">Stopped</strong>
+					<strong ng-if="!item.running">Running</strong>
+					<strong ng-if="item.running">Stopped</strong>
 					<br>{{item.since}}
 				</td>
 				<td>{{item.cost}}</td>
