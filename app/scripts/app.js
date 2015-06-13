@@ -58,12 +58,12 @@ angular
     })
     .controller('UserCtrl', function($scope, $location){
 		function checkRows(){
-			$scope.userData.selectedRows = false
-			var tmp = $scope.userData.images
+			$scope.userData.selectedRows = false;
+			var tmp = $scope.userData.images;
 			for (var i = 0, l = tmp.length; i < l; i++){
 				if (tmp[i].selected) {
 					$scope.userData.selectedRows = true;
-					i = l
+					i = l;
 				}
 			}
 		}
@@ -77,11 +77,11 @@ angular
 				$scope.userData.images[i].selected = $scope.userData.allSelected;
 			}
 			checkRows();
-		}
+		};
 		$scope.updateSelectedStatus = function(){
 			$scope.userData.allSelected = false;
 			checkRows();
-		}
+		};
 		$scope.userData = {
 			allSelected : false,
 			selectedRows : false,
@@ -146,7 +146,7 @@ angular
 	
 $http({url: loginApiUrl,
             method: 'POST',
-            data: { "id": "user","password" : "12dea96fec20593566ab75692c9949596833adc9"}, //sha1 hash din user
+            data: { 'id': 'user','password' : '12dea96fec20593566ab75692c9949596833adc9'}, //sha1 hash din user
 		    headers: {
                        'Content-Type': 'application/json'
                     },					
@@ -159,7 +159,7 @@ $http({url: loginApiUrl,
 				$scope.generatedAt=serverData.generatedAt;
 				$scope.validUntil=serverData.validUntil;
 				
-                    console.log("ServerData:", serverData);  
+                    console.log('ServerData:', serverData);  
 					
 					
     });  	

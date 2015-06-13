@@ -15,8 +15,8 @@ angular.module('VMFactoryApp')
 			$scope.config.repoName = name;
 		};
 		
-//		$http.jsonp('http://172.16.0.200:8080/api/category?callback=JSON_CALLBACK').success(function (data) {
-		$http.get('/mock/createservicereal.json').success(function (data) {
+		$http.jsonp('http://172.16.0.200:8080/api/category?callback=JSON_CALLBACK').success(function (data) {
+//		$http.get('/mock/createservicereal.json').success(function (data) {
 			$scope.services = data;
 			$scope.serviceIndexes = (function () {
 				var tmp = {};
