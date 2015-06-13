@@ -90,7 +90,7 @@ angular
 			});
 		};
 	})
-	.controller('UserCtrl', function($scope, $location){
+	.controller('UserCtrl', function($rootScope, $scope, $location, $http){
 		function checkRows(){
 			$scope.userData.selectedRows = false;
 			var tmp = $scope.userData.images;
@@ -120,7 +120,7 @@ angular
 		$scope.userData = {
 			allSelected : false,
 			selectedRows : false,
-			images: [
+			images: [/*
 				{
 					id:'image1',
 					selected:false,
@@ -167,6 +167,51 @@ angular
 					cost: '10$',
 					schedule: new Date('2015-06-03T09:00:00.000Z')
 				}
-			]
+			*/]
 		};
+	
+		$http({
+			url: $rootScope.ip + '/api/fleet',
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-Patron-Api-Key': $rootScope.token
+			},
+			dataType: 'application/json',
+			crossDomain: true
+		})
+		.success(function (data) {
+			
+			/*{
+				"blueprintName": "Jenkins",
+				"name": "/test5",
+				"numberOfShips": 1,
+				"memoryPerShip": 256,
+				"cpuPerShip": 1,
+				"diskPerShip": 0,
+				"urls": [
+				  "endockin-slave2:31000"
+				],
+				"deployed": false,
+				"status": null,
+				"statusSince": null
+			  }*/
+			
+			for (var i=0, l=data.length; i < l; i++){
+				var tmp = data[i]
+				$scope.userData.images.push({
+					id:tmp.name.substring(1),
+					selected:false,
+					name:tmp.name.substring(1),
+					url:tmp.urls,
+					deployed: tmp.deployed,
+					running:tmp.status,
+					since: tmp.statusSince,
+					cost: '0',
+					schedule: null
+				})
+			}
+			
+			$scope.userData.images
+		});
 	});

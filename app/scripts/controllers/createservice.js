@@ -68,7 +68,7 @@ angular.module('VMFactoryApp')
 			}
 		];
 	})
-	.controller('CloudProviderCtrl', function ($rootScope, $scope, $http) {
+	.controller('CloudProviderCtrl', function ($rootScope, $scope, $http, $state) {
 		$scope.clouds = [
 			{
 				id:'cloud1',
