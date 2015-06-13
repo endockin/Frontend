@@ -20,12 +20,13 @@
 		<div class="col div-20 tab-div-25 pad-xlarge-around">
 			<img ng-src="{{item.img}}" class="full-width">
 		</div>
-		<div class="col div-60 tab-div-50 pad-sides">
+		<div class="pull-right pad-xxlarge-top text-right radio-group">
+			<input type="radio" id="{{item.id}}" name="Cloud providers" ng-model="config.cloud" value="{{item.id}}">
+			<label for="{{item.id}}"><span class="invisible">Select {{item.name}}</span></label>
+		</div>
+		<div class="col div-75 tab-div-50 pad-sides">
 			<h2>{{item.name}}</h2>
 			<p>{{item.description}}</p>
-		</div>
-		<div class="col div-20 tab-div-25 pad-xxlarge-top text-right">
-			<input type="radio" id="{{item.id}}" name="Cloud providers" ng-model="config.cloud" value="{{item.id}}">
 		</div>
 	</li>
 </ul>

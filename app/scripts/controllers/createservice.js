@@ -15,8 +15,8 @@ angular.module('VMFactoryApp')
 			$scope.config.repoName = name;
 		};
 		
-		$http.jsonp('http://172.16.0.200:8080/api/category?callback=JSON_CALLBACK').success(function (data) {
-//		$http.get('/mock/createservicereal.json').success(function (data) {
+//		$http.jsonp('http://172.16.0.200:8080/api/category?callback=JSON_CALLBACK').success(function (data) {
+		$http.get('/mock/createservicereal.json').success(function (data) {
 			$scope.services = data;
 			$scope.serviceIndexes = (function () {
 				var tmp = {};
@@ -45,9 +45,9 @@ angular.module('VMFactoryApp')
 	.controller('ConfigureImageCtrl', function ($scope, $state) {
 		$scope.goToStep3 = function(isValid){
 			if(isValid){
-				$state.go('user.createservice.cloudprovider')
+				$state.go('user.createservice.cloudprovider');
 			}
-		}
+		};
 		if ($scope.config.repoName) {
 			$state.go('.serviceconfiguration');
 		}
@@ -85,7 +85,7 @@ angular.module('VMFactoryApp')
 		$scope.selectedCloudIndex = null;
 		$scope.config.cloud = $scope.clouds[$scope.selectedCloudIndex];
 		$scope.saveImage = function(){
-			console.log($scope.config)
+			console.log($scope.config);
 			
 			//pseudo save :)
 			
