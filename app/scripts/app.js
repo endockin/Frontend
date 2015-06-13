@@ -22,7 +22,8 @@ angular
     ])
     .config(function ($stateProvider, $urlRouterProvider) {
         // For any unmatched url, redirect to /state1
-        $urlRouterProvider.otherwise('/presentation');
+		$urlRouterProvider.otherwise('presentation/login');
+        //$urlRouterProvider.otherwise('/presentation');
         $stateProvider
             .state('presentation', {templateUrl: 'views/presentation.html', controller: 'HomeCtrl'})
             .state('presentation.main', {url: '/presentation', templateUrl: 'views/presentation/main.html'})
@@ -30,6 +31,7 @@ angular
             .state('presentation.contact', {url: '/contact',templateUrl: 'views/presentation/contact.html'})
             .state('presentation.signup', {url: '/signup',templateUrl: 'views/presentation/signup.html'})
             .state('presentation.features', {url: '/features',templateUrl: 'views/presentation/features.html'})
+			.state('presentation.login', {url: 'presentation/login',templateUrl: 'views/presentation/login.html', controller: 'LoginController'})
 
 			.state('user', {templateUrl: 'views/user.html', controller: 'UserCtrl'})
 				.state('user.dashboard', {url:'/dashboard', templateUrl: 'views/user/dashboard.html'})
@@ -47,8 +49,10 @@ angular
         };
 
         $scope.showLogin = function () {
+		
             ngDialog.open({
-                template: 'views/presentation/login.html'
+                template: 'views/presentation/login.html',
+				controller: 'LoginController'
             });
         };
 
@@ -103,4 +107,36 @@ angular
 				}
 			]
 		};
-    });
+    })
+	
+	.controller('LoginController', function($scope, $http) {
+	
+  
+	var loginApiUrl='http://172.16.0.200:8080/api/auth/login';
+
+
+	
+$http({url: loginApiUrl,
+            method: 'POST',
+            data: { "id": "user","password" : "12dea96fec20593566ab75692c9949596833adc9"}, //sha1 hash din user
+		    headers: {
+                       'Content-Type': 'application/json'
+                    },					
+			dataType: 'application/json',
+			crossDomain : true,
+             }).
+                success(function (serverData) {
+					
+				$scope.token= serverData.key ;
+				$scope.generatedAt=serverData.generatedAt;
+				$scope.validUntil=serverData.validUntil;
+				
+                    console.log("ServerData:", serverData);  
+					
+					
+    });  	
+	
+	});
+ 
+
+
