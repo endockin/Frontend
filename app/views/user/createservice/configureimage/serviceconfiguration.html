@@ -4,27 +4,62 @@
 		<div class="col tab-div-75">{{config.repoName}}</div>
 	</div>
 	<div class="row pad-large-row">
-		<div class="col tab-div-25"><label for="ServiceName">Service Name</label></div>
-		<div class="col tab-div-75"><input type="text" id="ServiceName" class="input tab-div-75" ng-model="config.serviceName" /></div>
+		<div class="col tab-div-25">
+			<label for="ServiceName">Service Name</label>
+		</div>
+		<div class="col tab-div-75">
+			<input type="text" id="ServiceName" name="ServiceName" class="input tab-div-75" ng-model="config.serviceName" required />
+			<div ng-show="Step2.$submitted || Step2.ServiceName.$touched">
+				<div ng-show="Step2.ServiceName.$error.required" class="text-color-standout">Please name your service</div>
+			</div>
+		</div>
 	</div>
 	<div class="row pad-large-row">
-		<div class="col tab-div-25"><label for="Ports">Ports</label></div>
-		<div class="col tab-div-75"><input type="text" id="Ports" class="input tab-div-75" ng-model="config.ports" /></div>
+		<div class="col tab-div-25">
+			<label for="NumberOfContainers">Number of containers</label>
+		</div>
+		<div class="col tab-div-75">
+			<input type="number" id="NumberOfContainers" name="NumberOfContainers" class="input tab-div-15" ng-model="config.numberOfContainers" required min="1" />
+			<div ng-show="Step2.$submitted || Step2.NumberOfContainers.$touched">
+				<div ng-show="Step2.NumberOfContainers.$error.required" class="text-color-standout">This field is required</div>
+				<div ng-show="Step2.NumberOfContainers.$error.min" class="text-color-standout">You need at least one container</div>
+			</div>
+		</div>
 	</div>
 	<div class="row pad-large-row">
-		<div class="col tab-div-25"><label for="NumberOfContainers">Number of containers</label></div>
-		<div class="col tab-div-75"><input type="number" id="NumberOfContainers" class="input tab-div-15" ng-model="config.numberOfContainers" /></div>
+		<div class="col tab-div-25">
+			<label for="Memory">Memory</label>
+		</div>
+		<div class="col tab-div-75">
+			<input type="number" id="Memory" name="Memory" class="input tab-div-15" ng-model="config.memory" required min="256" />MB
+			<div ng-show="Step2.$submitted || Step2.Memory.$touched">
+				<div ng-show="Step2.Memory.$error.required" class="text-color-standout">Field cannot be empty</div>
+				<div ng-show="Step2.Memory.$error.min" class="text-color-standout">Minimum value is 256</div>
+			</div>
+		</div>
 	</div>
 	<div class="row pad-large-row">
-		<div class="col tab-div-25"><label for="Memory">Memory</label></div>
-		<div class="col tab-div-75"><input type="number" id="Memory" class="input tab-div-15" ng-model="config.memory" /></div>
+		<div class="col tab-div-25">
+			<label for="CPUshares">CPU shares</label>
+		</div>
+		<div class="col tab-div-75">
+			<input type="number" id="CPUshares" name="CPUshares" class="input tab-div-15" ng-model="config.CPUshares" required min="1" />
+			<div ng-show="Step2.$submitted || Step2.CPUshares.$touched">
+				<div ng-show="Step2.CPUshares.$error.required" class="text-color-standout">Field cannot be empty</div>
+				<div ng-show="Step2.CPUshares.$error.min" class="text-color-standout">You need at least 1 CPU</div>
+			</div>
+		</div>
 	</div>
 	<div class="row pad-large-row">
-		<div class="col tab-div-25"><label for="CPUshares">CPU shares</label></div>
-		<div class="col tab-div-75"><input type="number" id="CPUshares" class="input tab-div-15" ng-model="config.CPUshares" /></div>
-	</div>
-	<div class="row pad-large-row">
-		<div class="col tab-div-25"><label for="DiskSpace">Disk Space</label></div>
-		<div class="col tab-div-75"><input type="number" id="DiskSpace" class="input tab-div-15" ng-model="config.diskSpace" /></div>
+		<div class="col tab-div-25">
+			<label for="DiskSpace">Disk Space</label>
+		</div>
+		<div class="col tab-div-75">
+			<input type="number" id="DiskSpace" name="DiskSpace" class="input tab-div-15" ng-model="config.diskSpace" required min="512" />MB
+			<div ng-show="Step2.$submitted || Step2.DiskSpace.$touched">
+				<div ng-show="Step2.DiskSpace.$error.required" class="text-color-standout">Field cannot be empty</div>
+				<div ng-show="Step2.DiskSpace.$error.min" class="text-color-standout">Minimum value is 512 MB</div>
+			</div>
+		</div>
 	</div>
 </div>

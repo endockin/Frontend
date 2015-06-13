@@ -5,25 +5,29 @@ angular.module('VMFactoryApp')
 		$scope.config = {
 			cloud:null,
 			repoName:null,
-			id:'NewRepo'
+			id:'NewRepo',
+			numberOfContainers:1,
+			memory:256,
+			CPUshares:1,
+			diskSpace:512
 		};
 		$scope.addImage = function (name) {
 			$scope.config.repoName = name;
 		};
 		
-//		$http.jsonp('http://172.16.117.24:8080/patron/service/category/all?callback=JSON_CALLBACK').success(function (data) {
+//		$http.jsonp('http://172.16.0.200:8080/api/category?callback=JSON_CALLBACK').success(function (data) {
 		$http.get('/mock/createservicereal.json').success(function (data) {
 			$scope.services = data;
 			$scope.serviceIndexes = (function () {
 				var tmp = {};
 				for (var i = 0, l = data.length; i < l; i++) {
-					tmp[data[i].categoryName] = i;
+					tmp[data[i].name] = i;
 				}
 				return tmp;
 			}());
 			if ($state.current.name === 'user.createservice') {
 				$state.go('.selectimage', {
-					category: data[0].categoryName
+					category: data[0].name
 				});
 			}
 		});
@@ -39,6 +43,11 @@ angular.module('VMFactoryApp')
 		$scope.servicesCategory = $state.params.category;
 	})
 	.controller('ConfigureImageCtrl', function ($scope, $state) {
+		$scope.goToStep3 = function(isValid){
+			if(isValid){
+				$state.go('user.createservice.cloudprovider');
+			}
+		};
 		if ($scope.config.repoName) {
 			$state.go('.serviceconfiguration');
 		}
@@ -46,10 +55,6 @@ angular.module('VMFactoryApp')
 			{
 				Category: 'Service Configuration',
 				state: 'serviceconfiguration'
-			},
-			{
-				Category: 'Environment variables',
-				state: 'environmentvariables'
 			}
 		];
 	})
@@ -77,10 +82,13 @@ angular.module('VMFactoryApp')
 				img:'https://www.digitalocean.com/assets/images/logos-badges/png/DO_Logo_Vertical_Blue-75e0d68b.png'
 			}
 		];
-		$scope.selectedCloudIndex;
+		$scope.selectedCloudIndex = null;
 		$scope.config.cloud = $scope.clouds[$scope.selectedCloudIndex];
 		$scope.saveImage = function(){
 			console.log($scope.config);
+			
+			//pseudo save :)
+			
 			$scope.userData.images.push(
 				{
 					id:$scope.config.id,
@@ -92,6 +100,6 @@ angular.module('VMFactoryApp')
 					cost: '-',
 					schedule: '-'
 				}
-			)
-		}
+			);
+		};
 	});

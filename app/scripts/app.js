@@ -22,7 +22,7 @@ angular
     ])
     .config(function ($stateProvider, $urlRouterProvider) {
         // For any unmatched url, redirect to /state1
-		$urlRouterProvider.otherwise('presentation/login');
+		$urlRouterProvider.otherwise('presentation');
         //$urlRouterProvider.otherwise('/presentation');
         $stateProvider
             .state('presentation', {templateUrl: 'views/presentation.html', controller: 'HomeCtrl'})
@@ -39,7 +39,6 @@ angular
 					.state('user.createservice.selectimage', {url:'/selectimage/{category}', templateUrl: 'views/user/createservice/selectimage.html', controller: 'SelectImageCtrl'})
 					.state('user.createservice.configureimage', {url:'/configureimage', templateUrl: 'views/user/createservice/configureimage.html', controller: 'ConfigureImageCtrl'})
 					.state('user.createservice.configureimage.serviceconfiguration', {url:'/serviceconfiguration', templateUrl: 'views/user/createservice/configureimage/serviceconfiguration.html'})
-					.state('user.createservice.configureimage.environmentvariables', {url:'/environmentvariables', templateUrl: 'views/user/createservice/configureimage/environmentvariables.html'})
 					.state('user.createservice.cloudprovider', {url:'/cloudprovider', templateUrl: 'views/user/createservice/cloudprovider.html', controller: 'CloudProviderCtrl'});
     })
     .controller('HomeCtrl', function ($scope, $location, ngDialog) {
@@ -58,52 +57,81 @@ angular
 
     })
     .controller('UserCtrl', function($scope, $location){
+		function checkRows(){
+			$scope.userData.selectedRows = false
+			var tmp = $scope.userData.images
+			for (var i = 0, l = tmp.length; i < l; i++){
+				if (tmp[i].selected) {
+					$scope.userData.selectedRows = true;
+					i = l
+				}
+			}
+		}
 		$scope.menuClass = function (page) {
             var current = $location.path().substring(1);
 			current = current.indexOf('/') >=0 ? current.substring(0,current.indexOf('/')) : current;
             return page === current ? 'active' : '';
         };
+		$scope.selectAll = function(){
+			for (var i=0; i < $scope.userData.images.length; i++){
+				$scope.userData.images[i].selected = $scope.userData.allSelected;
+			}
+			checkRows();
+		}
+		$scope.updateSelectedStatus = function(){
+			$scope.userData.allSelected = false;
+			checkRows();
+		}
 		$scope.userData = {
+			allSelected : false,
+			selectedRows : false,
 			images: [
 				{
 					id:'image1',
+					selected:false,
 					name:'Something awesome',
 					url:'http://cloudy.com/20938kj1p2o389lhsd897o2i34',
 					deployed: true,
-					status:'Running',
+					running:true,
 					since:'20.03.2015 15:00',
 					cost: '10$',
-					schedule: '20.04.2015 15:00'
+					schedule: new Date('2015-06-03T09:00:00.000Z'),
+					config: {
+						
+					}
 				},
 				{
 					id:'image2',
+					selected:false,
 					name:'Second awesome',
 					url:'http://cloudy.com/20938kj1p2o389lhsd897o2i34',
-					deployed: true,
-					status:'Running',
+					deployed: false,
+					running:false,
 					since:'20.03.2015 15:00',
 					cost: '10$',
-					schedule: '20.04.2015 15:00'
+					schedule: new Date('2015-06-03T09:00:00.000Z')
 				},
 				{
 					id:'image3',
+					selected:false,
 					name:'Can\'t get enough',
 					url:'http://cloudy.com/20938kj1p2o389lhsd897o2i34',
-					deployed: true,
-					status:'Running',
+					deployed: false,
+					running:false,
 					since:'20.03.2015 15:00',
 					cost: '10$',
-					schedule: '20.04.2015 15:00'
+					schedule: new Date('2015-06-03T09:00:00.000Z')
 				},
 				{
 					id:'image4',
+					selected:false,
 					name:'Glory to the Spaghetti monster',
 					url:'http://cloudy.com/20938kj1p2o389lhsd897o2i34',
 					deployed: true,
-					status:'Running',
+					running:true,
 					since:'20.03.2015 15:00',
 					cost: '10$',
-					schedule: '20.04.2015 15:00'
+					schedule: new Date('2015-06-03T09:00:00.000Z')
 				}
 			]
 		};

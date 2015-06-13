@@ -1,13 +1,18 @@
-<main class="pad-large-sides">
-	<h1>Dashboard</h1>
-	<table class="full-width table grid-large-sides">
+<main>
+	<div class="bg-hero pad-xxlarge-row pad-large-sides text-color-white text-resize-xxl text-uppercase text-weight-400">
+		Fleet Command
+	</div>
+	<table class="full-width table">
 		<thead>
 			<tr>
+				<th class="check-group">
+					<input type="checkbox" id="SelectAll" ng-model="userData.allSelected" ng-change="selectAll()">
+					<label for="SelectAll"><span class="invisible">Toggle all</span></label>
+				</th>
 				<th>Name</th>
 				<th>URL</th>
-				<th>Deployed</th>
+				<th class="text-center">Deployed</th>
 				<th>Status</th>
-				<th>Since</th>
 				<th>Cost</th>
 				<th>Schedule</th>
 				<th></th>
@@ -15,15 +20,48 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="item in userData.images">
-				<td>{{item.name}}</td>
-				<td>{{item.url}}</td>
-				<td>{{item.deployed}}</td>
-				<td>{{item.status}}</td>
-				<td>{{item.since}}</td>
+				<td class="check-group">
+					<input type="checkbox" id="{{item.id}}" ng-model="item.selected" ng-click="updateSelectedStatus()">
+					<label for="{{item.id}}"><span class="invisible">Toggle {{item.name}}</span></label>
+				</td>
+				<td>{{item.name}}
+					<br> <small><a href="#">details</a></small>
+				</td>
+				<td><a href="#">{{item.url}}</a>
+				</td>
+				<td class="text-center">
+					<i class="fa fa-lg fa-check text-color-primary" ng-if="item.deployed"></i>
+					<i class="fa fa-lg fa-remove text-color-standout" ng-if="!item.deployed"></i>
+				</td>
+				<td>
+					<strong ng-if="item.running">Running</strong>
+					<strong ng-if="!item.running">Stopped</strong>
+					<br>{{item.since}}
+				</td>
 				<td>{{item.cost}}</td>
-				<td>{{item.schedule}}</td>
-				<td><button class="btn btn-primary"><i class="fa fa-play btn-icon pad-small-sides"></i><span>Start</span></button></td>
+				<td>
+					<label class="display-block" for="">Schedule 
+						<span ng-if="item.running">stop</span>
+						<span ng-if="!item.running">start</span>
+					</label>
+					<input type="datetime-local" ng-model="item.schedule" class="input">
+				</td>
+				<td>
+					<button class="btn btn-small btn-primary" ng-if="!item.running"><i class="fa fa-play btn-icon"></i><span>Start now</span>
+					</button>
+					<button class="btn btn-small btn-standout" ng-if="item.running"><i class="fa fa-stop btn-icon"></i><span>Stop now</span>
+					</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>
+	{{userData.selectedRows}}
+	<div class="pad-large-around" ng-if="!userData.selectedRows">
+		<button type="button" class="btn btn-primary"><i class="fa fa-play btn-icon"></i><span>Start all</span></button>
+		<button type="button" class="btn btn-standout"><i class="fa fa-stop btn-icon"></i><span>Stop all</span></button>
+	</div>
+	<div class="pad-large-around" ng-if="userData.selectedRows">
+		<button type="button" class="btn btn-primary"><i class="fa fa-play btn-icon"></i><span>Start selected</span></button>
+		<button type="button" class="btn btn-standout"><i class="fa fa-stop btn-icon"></i><span>Stop all</span></button>
+	</div>
 </main>
