@@ -41,7 +41,7 @@ angular
 					.state('user.createservice.cloudprovider', {url:'/cloudprovider', templateUrl: 'views/user/createservice/cloudprovider.html', controller: 'CloudProviderCtrl'});
 	})
 	.run(function($rootScope){
-			$rootScope.ip = 'http://192.168.1.156:8080';
+			$rootScope.ip = 'http://172.16.116.30:8080';
 			$rootScope.token = null;
 	 })
 	.controller('HomeCtrl', function ($state, $scope, $location, ngDialog) {
@@ -71,7 +71,7 @@ angular
 				url: loginApiUrl,
 				method: 'POST',
 				data: {
-					'id': $scope.formData.username,
+					'email': $scope.formData.username,
 					'password': $scope.formData.password
 				},
 				headers: {
@@ -123,7 +123,7 @@ angular
 			images: []
 		};
 		var getDashboard = function(){
-			
+			console.log($rootScope.token);
 			$http({
 					url: $rootScope.ip + '/api/fleet',
 					method: 'GET',
