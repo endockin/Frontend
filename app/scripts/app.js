@@ -22,28 +22,71 @@ angular
 	])
 	.config(function ($stateProvider, $urlRouterProvider) {
 		// For any unmatched url, redirect to /state1
-//		$urlRouterProvider.otherwise('/');
+		//		$urlRouterProvider.otherwise('/');
 		$urlRouterProvider.otherwise('/presentation');
 		$stateProvider
-			.state('presentation', {templateUrl: 'views/presentation.html', controller: 'HomeCtrl'})
-			.state('presentation.main', {url: '/presentation', templateUrl: 'views/presentation/main.html'})
-			.state('presentation.help', {url: '/help',templateUrl: 'views/presentation/help.html'})
-			.state('presentation.contact', {url: '/contact',templateUrl: 'views/presentation/contact.html'})
-			.state('presentation.signup', {url: '/signup',templateUrl: 'views/presentation/signup.html'})
-			.state('presentation.features', {url: '/features',templateUrl: 'views/presentation/features.html'})
+			.state('presentation', {
+				templateUrl: 'views/presentation.html',
+				controller: 'HomeCtrl'
+			})
+			.state('presentation.main', {
+				url: '/presentation',
+				templateUrl: 'views/presentation/main.html'
+			})
+			.state('presentation.help', {
+				url: '/help',
+				templateUrl: 'views/presentation/help.html'
+			})
+			.state('presentation.contact', {
+				url: '/contact',
+				templateUrl: 'views/presentation/contact.html'
+			})
+			.state('presentation.signup', {
+				url: '/signup',
+				templateUrl: 'views/presentation/signup.html'
+			})
+			.state('presentation.features', {
+				url: '/features',
+				templateUrl: 'views/presentation/features.html'
+			})
 
-			.state('user', {templateUrl: 'views/user.html', controller: 'UserCtrl'})
-				.state('user.dashboard', {url:'/dashboard', templateUrl: 'views/user/dashboard.html'})
-				.state('user.createservice', {url:'/createservice', templateUrl: 'views/user/createservice.html', controller: 'CreateServiceCtrl'})
-					.state('user.createservice.selectimage', {url:'/selectimage/{category}', templateUrl: 'views/user/createservice/selectimage.html', controller: 'SelectImageCtrl'})
-					.state('user.createservice.configureimage', {url:'/configureimage', templateUrl: 'views/user/createservice/configureimage.html', controller: 'ConfigureImageCtrl'})
-					.state('user.createservice.configureimage.serviceconfiguration', {url:'/serviceconfiguration', templateUrl: 'views/user/createservice/configureimage/serviceconfiguration.html'})
-					.state('user.createservice.cloudprovider', {url:'/cloudprovider', templateUrl: 'views/user/createservice/cloudprovider.html', controller: 'CloudProviderCtrl'});
+		.state('user', {
+				templateUrl: 'views/user.html',
+				controller: 'UserCtrl'
+			})
+			.state('user.dashboard', {
+				url: '/dashboard',
+				templateUrl: 'views/user/dashboard.html'
+			})
+			.state('user.createservice', {
+				url: '/createservice',
+				templateUrl: 'views/user/createservice.html',
+				controller: 'CreateServiceCtrl'
+			})
+			.state('user.createservice.selectimage', {
+				url: '/selectimage/{category}',
+				templateUrl: 'views/user/createservice/selectimage.html',
+				controller: 'SelectImageCtrl'
+			})
+			.state('user.createservice.configureimage', {
+				url: '/configureimage',
+				templateUrl: 'views/user/createservice/configureimage.html',
+				controller: 'ConfigureImageCtrl'
+			})
+			.state('user.createservice.configureimage.serviceconfiguration', {
+				url: '/serviceconfiguration',
+				templateUrl: 'views/user/createservice/configureimage/serviceconfiguration.html'
+			})
+			.state('user.createservice.cloudprovider', {
+				url: '/cloudprovider',
+				templateUrl: 'views/user/createservice/cloudprovider.html',
+				controller: 'CloudProviderCtrl'
+			});
 	})
-	.run(function($rootScope){
-			$rootScope.ip = 'http://172.16.116.30:8080';
-			$rootScope.token = null;
-	 })
+	.run(function ($rootScope) {
+		$rootScope.ip = 'http://rocj-inolab-d01:8082';
+		$rootScope.token = null;
+	})
 	.controller('HomeCtrl', function ($state, $scope, $location, ngDialog) {
 
 		$scope.menuClass = function (page) {
@@ -54,47 +97,31 @@ angular
 		$scope.showLogin = function () {
 			ngDialog.open({
 				template: 'views/presentation/login.html',
-				scope:$scope,
+				scope: $scope,
 				controller: 'LoginCtrl'
 			});
 		};
 	})
-	.controller('LoginCtrl',function ($rootScope, $scope, $http, $state) {
-		var loginApiUrl = $rootScope.ip + '/api/auth/login';
-		$scope.inputActive = function(data){
-			if (data.length){
+	.controller('LoginCtrl', function ($rootScope, $scope, $http, $state, connect) {
+		$scope.inputActive = function (data) {
+			if (data.length) {
 				return 'input--filled';
 			}
 		};
-		$scope.login = function(){
-			$http({
-				url: loginApiUrl,
-				method: 'POST',
-				data: {
-					'email': $scope.formData.username,
-					'password': $scope.formData.password
-				},
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				dataType: 'application/json',
-				crossDomain: true,
-			})
-			.success(function (serverData) {
-				console.log(serverData.key);
-				$rootScope.token = serverData.key;
-				$rootScope.generatedAt = serverData.generatedAt;
-				$rootScope.validUntil = serverData.validUntil;
-				$state.go('user.dashboard');
-				$scope.closeThisDialog();
-			});
+		$scope.login = function () {
+			connect
+				.login($scope.formData.username, $scope.formData.password)
+				.then(function () {
+					$state.go('user.dashboard');
+					$scope.closeThisDialog();
+				});
 		};
 	})
-	.controller('UserCtrl', function($rootScope, $scope, $location, $http, $interval){
-		function checkRows(){
+	.controller('UserCtrl', function ($rootScope, $scope, $location, connect) {
+		function checkRows() {
 			$scope.userData.selectedRows = false;
 			var tmp = $scope.userData.images;
-			for (var i = 0, l = tmp.length; i < l; i++){
+			for (var i = 0, l = tmp.length; i < l; i++) {
 				if (tmp[i].selected) {
 					$scope.userData.selectedRows = true;
 					i = l;
@@ -103,56 +130,40 @@ angular
 		}
 		$scope.menuClass = function (page) {
 			var current = $location.path().substring(1);
-			current = current.indexOf('/') >=0 ? current.substring(0,current.indexOf('/')) : current;
+			current = current.indexOf('/') >= 0 ? current.substring(0, current.indexOf('/')) : current;
 			return page === current ? 'active' : '';
 		};
-		$scope.selectAll = function(){
-			for (var i=0; i < $scope.userData.images.length; i++){
+		$scope.selectAll = function () {
+			for (var i = 0; i < $scope.userData.images.length; i++) {
 				$scope.userData.images[i].selected = $scope.userData.allSelected;
 			}
 			checkRows();
 		};
-		$scope.updateSelectedStatus = function(){
+		$scope.updateSelectedStatus = function () {
 			$scope.userData.allSelected = false;
 			checkRows();
 		};
 
 		$scope.userData = {
-			allSelected : false,
-			selectedRows : false,
+			allSelected: false,
+			selectedRows: false,
 			images: []
 		};
-		var getDashboard = function(){
-			console.log($rootScope.token);
-			$http({
-					url: $rootScope.ip + '/api/fleet',
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-						'X-Patron-Api-Key': $rootScope.token
-					},
-					dataType: 'application/json',
-					crossDomain: true
-				})
-				.success(function (data) {
-					for (var i=0, l=data.length; i < l; i++){
-						var tmp = data[i]
-						$scope.userData.images[i] = {
-							id:tmp.name.substring(1),
-							selected:false,
-							name:tmp.name.substring(1),
-							url:tmp.urls,
-							deployed: tmp.deployed,
-							running:tmp.status,
-							since: tmp.statusSince,
-							cost: '0',
-							schedule: null
-						}
-					}
 
-					$scope.userData.images
-				});
+		connect.request('/api/fleet').then(function (data) {
+			for (var i = 0, l = data.length; i < l; i++) {
+				var tmp = data[i];
+				$scope.userData.images[i] = {
+					id: tmp.name.substring(1),
+					selected: false,
+					name: tmp.name.substring(1),
+					url: tmp.urls,
+					deployed: tmp.deployed,
+					running: tmp.status,
+					since: tmp.statusSince,
+					cost: '0',
+					schedule: null
+				};
 			}
-		getDashboard();
-		var update = $interval(getDashboard, 5000);
+		});
 	});
