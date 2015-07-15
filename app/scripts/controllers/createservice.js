@@ -2,39 +2,41 @@
 
 angular.module('VMFactoryApp')
 	.controller('CreateServiceCtrl', function ($rootScope, $scope, $state, $location, connect) {
-		$scope.config = {
-			cloud: null,
-			repoName: null,
-			id: 'NewRepo',
-			numberOfContainers: 1,
-			memory: 256,
-			CPUshares: 1,
-			diskSpace: 512
-		};
-		$scope.addImage = function (name) {
-			$scope.config.id = name;
-		};
-		connect.request('/api/category').then(function (data) {
-			$scope.services = data;
-			$scope.serviceIndexes = (function () {
-				var tmp = {};
-				for (var i = 0, l = data.length; i < l; i++) {
-					tmp[data[i].name] = i;
+		if (connect.isAuthenticated()) {
+			$scope.config = {
+				cloud: null,
+				repoName: null,
+				id: 'NewRepo',
+				numberOfContainers: 1,
+				memory: 256,
+				CPUshares: 1,
+				diskSpace: 512
+			};
+			$scope.addImage = function (name) {
+				$scope.config.id = name;
+			};
+			connect.request('/api/category').then(function (data) {
+				$scope.services = data;
+				$scope.serviceIndexes = (function () {
+					var tmp = {};
+					for (var i = 0, l = data.length; i < l; i++) {
+						tmp[data[i].name] = i;
+					}
+					return tmp;
+				}());
+				if ($state.current.name === 'user.createservice') {
+					$state.go('.selectimage', {
+						category: data[0].name
+					});
 				}
-				return tmp;
-			}());
-			if ($state.current.name === 'user.createservice') {
-				$state.go('.selectimage', {
-					category: data[0].name
-				});
+			});
+			if (!$scope.config.repoName) {
+				$state.go('user.createservice');
 			}
-		});
-		$scope.tabClass = function (page) {
-			var current = $location.path().substring($location.path().lastIndexOf('/') + 1);
-			return page === current ? 'active' : '';
-		};
-		if (!$scope.config.repoName) {
-			$state.go('user.createservice');
+			$scope.tabClass = function (page) {
+				var current = $location.path().substring($location.path().lastIndexOf('/') + 1);
+				return page === current ? 'active' : '';
+			};
 		}
 	})
 	.controller('SelectImageCtrl', function ($scope, $state) {

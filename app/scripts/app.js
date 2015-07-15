@@ -83,11 +83,7 @@ angular
 				controller: 'CloudProviderCtrl'
 			});
 	})
-	.run(function ($rootScope) {
-		$rootScope.ip = 'http://rocj-inolab-d01:8082';
-		$rootScope.token = null;
-	})
-	.controller('HomeCtrl', function ($state, $scope, $location, ngDialog) {
+	.controller('HomeCtrl', function ($state, $scope, $location, ngDialog, connect) {
 
 		$scope.menuClass = function (page) {
 			var current = $location.path().substring(1);
@@ -95,14 +91,20 @@ angular
 		};
 		$scope.loginData = {};
 		$scope.showLogin = function () {
-			ngDialog.open({
-				template: 'views/presentation/login.html',
-				scope: $scope,
-				controller: 'LoginCtrl'
-			});
+			if (connect.isAuthenticated()) {
+				$state.go('user.dashboard');
+			} else {
+				ngDialog.open({
+					template: 'views/presentation/login.html',
+					scope: $scope,
+					controller: 'LoginCtrl'
+				});
+			}
 		};
 	})
 	.controller('LoginCtrl', function ($rootScope, $scope, $http, $state, connect) {
+
+
 		$scope.inputActive = function (data) {
 			if (data.length) {
 				return 'input--filled';
@@ -117,7 +119,26 @@ angular
 				});
 		};
 	})
-	.controller('UserCtrl', function ($rootScope, $scope, $location, connect) {
+	.controller('UserCtrl', function ($rootScope, $scope, $state, $location, connect) {
+		if (connect.isAuthenticated()) {
+			connect.request('/api/fleet').then(function (data) {
+				for (var i = 0, l = data.length; i < l; i++) {
+					var tmp = data[i];
+					$scope.userData.images[i] = {
+						id: tmp.name.substring(1),
+						selected: false,
+						name: tmp.name.substring(1),
+						url: tmp.urls,
+						deployed: tmp.deployed,
+						running: tmp.status,
+						since: tmp.statusSince,
+						cost: '0',
+						schedule: null
+					};
+				}
+			});
+		}
+
 		function checkRows() {
 			$scope.userData.selectedRows = false;
 			var tmp = $scope.userData.images;
@@ -143,6 +164,10 @@ angular
 			$scope.userData.allSelected = false;
 			checkRows();
 		};
+		$scope.logout = function(){
+			connect.logout();
+			$state.go('presentation.main');
+		}
 
 		$scope.userData = {
 			allSelected: false,
@@ -150,20 +175,4 @@ angular
 			images: []
 		};
 
-		connect.request('/api/fleet').then(function (data) {
-			for (var i = 0, l = data.length; i < l; i++) {
-				var tmp = data[i];
-				$scope.userData.images[i] = {
-					id: tmp.name.substring(1),
-					selected: false,
-					name: tmp.name.substring(1),
-					url: tmp.urls,
-					deployed: tmp.deployed,
-					running: tmp.status,
-					since: tmp.statusSince,
-					cost: '0',
-					schedule: null
-				};
-			}
-		});
 	});

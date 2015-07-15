@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('VMFactoryApp')
-	.service('connect', function ($http) {
+	.service('connect', function ($http, $state) {
 
 		var userSession = {
 			token: null,
@@ -25,10 +25,19 @@ angular.module('VMFactoryApp')
 				crossDomain: true
 			}).then(function (response) {
 				var data = response.data;
+				console.log(data);	
 				userSession.token = data.key;
+				userSession.generatedAt = data.generatedAt;
+				userSession.validUntil = data.validUntil;
 			});
 		};
-
+		
+		var logout = function(){
+			userSession.token=null;
+			userSession.generatedAt=null;
+			userSession.validUntil=null;
+		};
+		
 		var request = function (apiAdr) {
 			return $http({
 				url: baseUrl + apiAdr,
@@ -43,9 +52,20 @@ angular.module('VMFactoryApp')
 				return response.data;
 			});
 		};
+	
+		var isAuthenticated = function(){
+			if (userSession.token && userSession.validUntil >= Date.now()) { 
+				return true;
+			} else {
+				$state.go('presentation.main');
+				return false;
+			}
+		};
 
 		return {
 			login: login,
+			logout: logout,
 			request: request,
+			isAuthenticated: isAuthenticated
 		};
 	});
