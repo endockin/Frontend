@@ -53,6 +53,22 @@ angular.module('VMFactoryApp')
 			});
 		};
 	
+		var post = function(apiAdr, data){
+			return $http({
+				url: baseUrl + apiAdr,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-Patron-Api-Key': userSession.token
+				},
+				dataType: 'application/json',
+				data: data
+				
+			}).then(function (response) {
+				return response.data;
+			});
+		}
+	
 		var isAuthenticated = function(){
 			if (userSession.token && userSession.validUntil >= Date.now()) { 
 				return true;
@@ -66,6 +82,7 @@ angular.module('VMFactoryApp')
 			login: login,
 			logout: logout,
 			request: request,
+			post: post,
 			isAuthenticated: isAuthenticated
 		};
 	});

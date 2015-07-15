@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('VMFactoryApp')
-	.controller('CreateServiceCtrl', function ($rootScope, $scope, $state, $location, connect) {
+	.controller('CreateServiceCtrl', function ($scope, $state, $location, connect) {
 		if (connect.isAuthenticated()) {
 			$scope.config = {
 				cloud: null,
@@ -58,7 +58,7 @@ angular.module('VMFactoryApp')
 			}
 		];
 	})
-	.controller('CloudProviderCtrl', function ($rootScope, $scope, $http, $state) {
+	.controller('CloudProviderCtrl', function ($scope, connect, $state) {
 		$scope.clouds = [
 			{
 				id: 'cloud1',
@@ -83,9 +83,34 @@ angular.module('VMFactoryApp')
 			}
 		];
 		$scope.selectedCloudIndex = null;
-		$scope.config.cloud = $scope.clouds[$scope.selectedCloudIndex];
-
-		$http({
+		$scope.config.cloud = null;
+		$scope.shipConfiguration = {
+			blueprintName: $scope.config.id,
+			cpuPerShip: $scope.config.CPUshares,
+			diskPerShip: $scope.config.diskSpace,
+			memoryPerShip: $scope.config.memory,
+			name: $scope.config.serviceName,
+			numberOfShips: $scope.config.numberOfContainers
+		}
+		$scope.saveShip = function(){
+			connect.post('/api/fleet', $scope.shipConfiguration).then(function(){
+				$scope.services = data;
+				$scope.serviceIndexes = (function () {
+					var tmp = {};
+					for (var i = 0, l = data.length; i < l; i++) {
+						tmp[data[i].name] = i;
+					}
+					return tmp;
+				}());
+				if ($state.current.name === 'user.createservice') {
+					$state.go('.selectimage', {
+						category: data[0].name
+					});
+				}
+			})
+		}
+	
+		/*$http({
 			url: $rootScope.ip + '/api/fleet',
 			method: 'POST',
 			headers: {
@@ -115,6 +140,7 @@ angular.module('VMFactoryApp')
 					category: data[0].name
 				});
 			}
-		});
+		});*/
+	
 
 	});
