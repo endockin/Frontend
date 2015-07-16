@@ -105,7 +105,7 @@ angular
 	})
 	.controller('LoginCtrl', function ($rootScope, $scope, $http, $state, connect) {
 
-
+		$scope.loginError = false;
 		$scope.inputActive = function (data) {
 			if (data.length) {
 				return 'input--filled';
@@ -114,9 +114,14 @@ angular
 		$scope.login = function () {
 			connect
 				.login($scope.formData.username, $scope.formData.password)
-				.then(function () {
-					$state.go('user.dashboard');
-					$scope.closeThisDialog();
+				.then(function (response) {
+					console.log('reponse', response);
+					if (response.data) {
+						$state.go('user.dashboard');
+						$scope.closeThisDialog();
+					} else {
+						$scope.loginError = true;
+					}
 				});
 		};
 	})
@@ -143,7 +148,7 @@ angular
 			}
 		};
 
-		
+
 
 		function checkRows() {
 			$scope.userData.selectedRows = false;

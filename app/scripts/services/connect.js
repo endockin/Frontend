@@ -28,6 +28,10 @@ angular.module('VMFactoryApp')
 				userSession.token = data.key;
 				userSession.generatedAt = data.generatedAt;
 				userSession.validUntil = data.validUntil;
+				return response;
+			}, function(response){
+				console.log('data error');
+				return response;
 			});
 		};
 		

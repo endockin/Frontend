@@ -2,21 +2,27 @@
     <div class="main-container">
         <h2>Login to your account</h2>
         <div class="input input--kaede input--filled">
-            <input class="input__field input__field--kaede" type="text" id="EmailField" ng-model="formData.username" />
+            <input class="input__field input__field--kaede" type="text" id="EmailField" name="EmailField" ng-model="formData.username" required="" />
             <label class="input__label input__label--kaede" for="EmailField">
-                <span class="input__label-content input__label-content--kaede">Email</span>
+                <span class="input__label-content input__label-content--kaede">Username</span>
             </label>
         </div>
+        <div ng-show="loginForm.EmailField.$touched" class="pull-up-validation pad-bot">
+        	<label for="EmailField" class="text-color-standout" ng-show="loginForm.EmailField.$error.required">Username field is required</label>
+		</div>
         <div class="input input--kaede input--filled">
-            <input class="input__field input__field--kaede" type="password" id="PasswordField" ng-model="formData.password" />
+            <input class="input__field input__field--kaede" type="password" id="PasswordField" name="PasswordField" ng-model="formData.password" required="" />
             <label class="input__label input__label--kaede" for="PasswordField">
                 <span class="input__label-content input__label-content--kaede">Password</span>
             </label>
         </div>
+        <div ng-show="loginForm.PasswordField.$touched" class="pull-up-validation pad-bot">
+        	<label for="PasswordField" class="text-color-standout" ng-show="loginForm.PasswordField.$error.required">Password field is required</label>
+		</div>
 
 		  <!--button ui-sref="user.dashboard"   class="btn btn-primary text-uppercase"><i class="fa fa fa-arrow-right btn-icon"></i><span>Login</span-->
 		
+		<p ng-show="loginError" class="text-color-standout">Your username or password are wrong</p>
         <button type="submit" class="btn btn-primary text-uppercase"><i class="fa fa fa-arrow-right btn-icon"></i><span>Login</span></button>
-
     </div>
 </form>
