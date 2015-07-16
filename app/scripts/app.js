@@ -125,7 +125,7 @@ angular
 				});
 		};
 	})
-	.controller('UserCtrl', function ($rootScope, $scope, $state, $location, connect, $timeout) {
+	.controller('UserCtrl', function ($rootScope, $scope, $state, $location, connect, $timeout, genericMessages) {
 		$scope.getDashboard = function () {
 			if (connect.isAuthenticated()) {
 				connect.request('/api/fleet').then(function (data) {
@@ -178,6 +178,8 @@ angular
 		$scope.logout = function () {
 			connect.logout();
 			$state.go('presentation.main');
+			genericMessages.message = '<p>You have been successfully logged out</p>';
+			genericMessages.type='success';
 		}
 
 		$scope.userData = {

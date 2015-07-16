@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('VMFactoryApp')
-	.service('connect', function ($http, $state) {
+	.service('connect', function ($http, $state, genericMessages) {
 
 		var userSession = {
 			token: null,
@@ -77,6 +77,8 @@ angular.module('VMFactoryApp')
 				return true;
 			} else {
 				$state.go('presentation.main');
+				genericMessages.message = '<h1>You have been logged out</h1><p>Your session may have expired, please try logging back in</p>';
+				genericMessages.type = 'error';
 				return false;
 			}
 		};
