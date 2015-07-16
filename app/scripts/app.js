@@ -56,7 +56,8 @@ angular
 			})
 			.state('user.dashboard', {
 				url: '/dashboard',
-				templateUrl: 'views/user/dashboard.html'
+				templateUrl: 'views/user/dashboard.html',
+				controller: 'DashboardCtrl'
 			})
 			.state('user.createservice', {
 				url: '/createservice',
@@ -119,25 +120,30 @@ angular
 				});
 		};
 	})
-	.controller('UserCtrl', function ($rootScope, $scope, $state, $location, connect) {
-		if (connect.isAuthenticated()) {
-			connect.request('/api/fleet').then(function (data) {
-				for (var i = 0, l = data.length; i < l; i++) {
-					var tmp = data[i];
-					$scope.userData.images[i] = {
-						id: tmp.name.substring(1),
-						selected: false,
-						name: tmp.name.substring(1),
-						url: tmp.urls,
-						deployed: tmp.deployed,
-						running: tmp.status,
-						since: tmp.statusSince,
-						cost: '0',
-						schedule: null
-					};
-				}
-			});
-		}
+	.controller('UserCtrl', function ($rootScope, $scope, $state, $location, connect, $timeout) {
+		$scope.getDashboard = function () {
+			if (connect.isAuthenticated()) {
+				connect.request('/api/fleet').then(function (data) {
+					console.log(data);
+					for (var i = 0, l = data.length; i < l; i++) {
+						var tmp = data[i];
+						$scope.userData.images[i] = {
+							id: tmp.name.substring(1),
+							selected: false,
+							name: tmp.name.substring(1),
+							url: tmp.urls,
+							deployed: tmp.deployed,
+							running: tmp.status,
+							since: tmp.statusSince,
+							cost: '0',
+							schedule: null
+						};
+					}
+				});
+			}
+		};
+
+		
 
 		function checkRows() {
 			$scope.userData.selectedRows = false;
@@ -164,7 +170,7 @@ angular
 			$scope.userData.allSelected = false;
 			checkRows();
 		};
-		$scope.logout = function(){
+		$scope.logout = function () {
 			connect.logout();
 			$state.go('presentation.main');
 		}
@@ -174,5 +180,13 @@ angular
 			selectedRows: false,
 			images: []
 		};
+
+	})
+	.controller('DashboardCtrl', function ($scope, $timeout) {
+		console.log('timer start');
+		$scope.getDashboard();
+		$timeout($scope.getDashboard, 5000);
+		$timeout($scope.getDashboard, 10000);
+		$timeout($scope.getDashboard, 15000);
 
 	});

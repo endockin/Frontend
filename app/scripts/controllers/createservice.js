@@ -93,7 +93,7 @@ angular.module('VMFactoryApp')
 			numberOfShips: $scope.config.numberOfContainers
 		}
 		$scope.saveShip = function(){
-			connect.post('/api/fleet', $scope.shipConfiguration).then(function(){
+			connect.post('/api/fleet', $scope.shipConfiguration).then(function(data){
 				$scope.services = data;
 				$scope.serviceIndexes = (function () {
 					var tmp = {};
@@ -102,12 +102,9 @@ angular.module('VMFactoryApp')
 					}
 					return tmp;
 				}());
-				if ($state.current.name === 'user.createservice') {
-					$state.go('.selectimage', {
-						category: data[0].name
-					});
-				}
-			})
+				$state.go('user.dashboard');
+				
+			});
 		}
 	
 		/*$http({

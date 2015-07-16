@@ -25,7 +25,6 @@ angular.module('VMFactoryApp')
 				crossDomain: true
 			}).then(function (response) {
 				var data = response.data;
-				console.log(data);	
 				userSession.token = data.key;
 				userSession.generatedAt = data.generatedAt;
 				userSession.validUntil = data.validUntil;
