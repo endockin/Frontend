@@ -9,7 +9,7 @@ angular.module('VMFactoryApp')
 			validUntil: null
 		};
 		var baseUrl = 'http://rocj-inolab-d01:8082';
-
+		
 		var login = function (usr, pass) {
 			return $http({
 				url: baseUrl + '/api/auth/login',
@@ -28,6 +28,7 @@ angular.module('VMFactoryApp')
 				userSession.token = data.key;
 				userSession.generatedAt = data.generatedAt;
 				userSession.validUntil = data.validUntil;
+				localStorage.setItem('usr',JSON.stringify(userSession));
 				return response;
 			}, function(response){
 				console.log('data error');
@@ -39,6 +40,7 @@ angular.module('VMFactoryApp')
 			userSession.token=null;
 			userSession.generatedAt=null;
 			userSession.validUntil=null;
+			localStorage.removeItem('usr');
 		};
 		
 		var request = function (apiAdr) {
@@ -73,12 +75,20 @@ angular.module('VMFactoryApp')
 		}
 	
 		var isAuthenticated = function(){
-			if (userSession.token && userSession.validUntil >= Date.now()) { 
-				return true;
+			if (localStorage.getItem('usr')){
+				var tmp = JSON.parse(localStorage.getItem('usr'));
+				if (tmp.token && tmp.validUntil >= Date.now()) {
+					userSession.token = tmp.token;
+					userSession.generatedAt = tmp.generatedAt;
+					userSession.validUntil = tmp.validUntil;
+					return true;
+				} else {
+					$state.go('presentation.main');
+					genericMessages.message = '<h1>You have been logged out</h1><p>Your session may have expired, please try logging back in</p>';
+					genericMessages.type = 'error';
+					return false;
+				}
 			} else {
-				$state.go('presentation.main');
-				genericMessages.message = '<h1>You have been logged out</h1><p>Your session may have expired, please try logging back in</p>';
-				genericMessages.type = 'error';
 				return false;
 			}
 		};

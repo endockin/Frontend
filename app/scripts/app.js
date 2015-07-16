@@ -115,7 +115,6 @@ angular
 			connect
 				.login($scope.formData.username, $scope.formData.password)
 				.then(function (response) {
-					console.log('reponse', response);
 					if (response.data) {
 						$state.go('user.dashboard');
 						$scope.closeThisDialog();
@@ -129,7 +128,6 @@ angular
 		$scope.getDashboard = function () {
 			if (connect.isAuthenticated()) {
 				connect.request('/api/fleet').then(function (data) {
-					console.log(data);
 					for (var i = 0, l = data.length; i < l; i++) {
 						var tmp = data[i];
 						$scope.userData.images[i] = {
@@ -203,7 +201,6 @@ angular
 
 	})
 	.controller('DashboardCtrl', function ($scope, $timeout) {
-		console.log('timer start');
 		$scope.getDashboard();
 		$timeout($scope.getDashboard, 5000);
 		$timeout($scope.getDashboard, 10000);
