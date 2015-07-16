@@ -25,7 +25,10 @@
 					<label for="{{item.id}}"><span class="invisible">Toggle {{item.name}}</span></label>
 				</td>
 				<td>{{item.name}}
-					<br> <small><a href="#">details</a></small>
+					<div>
+						 <small><a href="#" ng-click="showDetails(item)">details</a></small>
+					</div>
+					
 				</td>
 				<td><div ng-repeat="url in item.url"><a ng-href="http://{{url}}">{{url}}</div></a>
 				</td>

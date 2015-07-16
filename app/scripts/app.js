@@ -125,7 +125,7 @@ angular
 				});
 		};
 	})
-	.controller('UserCtrl', function ($rootScope, $scope, $state, $location, connect, $timeout, genericMessages) {
+	.controller('UserCtrl', function ($scope, $location, $state, connect, $timeout, genericMessages, ngDialog) {
 		$scope.getDashboard = function () {
 			if (connect.isAuthenticated()) {
 				connect.request('/api/fleet').then(function (data) {
@@ -138,6 +138,9 @@ angular
 							name: tmp.name.substring(1),
 							url: tmp.urls,
 							deployed: tmp.deployed,
+							diskPerShip: tmp.diskPerShip,
+							memoryPerShip: tmp.memoryPerShip,
+							numberOfShips: tmp.numberOfShips,
 							running: tmp.status,
 							since: tmp.statusSince,
 							cost: '0',
@@ -147,8 +150,6 @@ angular
 				});
 			}
 		};
-
-
 
 		function checkRows() {
 			$scope.userData.selectedRows = false;
@@ -179,7 +180,19 @@ angular
 			connect.logout();
 			$state.go('presentation.main');
 			genericMessages.message = '<p>You have been successfully logged out</p>';
-			genericMessages.type='success';
+			genericMessages.type = 'success';
+		}
+		$scope.showDetails = function (target) {
+			ngDialog.open({
+				plain:true,
+				template: 
+					'<div>' +
+						'<h1>' + target.name + '</h1>' +
+						'<p class="row"><b class="col mob-div-50">Number of ships:</b><span class="col mob-div-50">' + target.numberOfShips + '</span></p>' +
+						'<p class="row"><b class="col mob-div-50">Memory per ship:</b><span class="col mob-div-50">' + target.memoryPerShip + '</span></p>' +
+						'<p class="row"><b class="col mob-div-50">Disk Space per ship:</b><span class="col mob-div-50">' + target.diskPerShip + '</span></p>' +
+					'</div>'
+			})
 		}
 
 		$scope.userData = {
