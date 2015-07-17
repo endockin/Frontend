@@ -38,7 +38,7 @@
 				</td>
 				<td>
 					<strong>{{item.running}}</strong> <span ng-if="itme.running">since</span>
-					<br>{{item.since}}
+					<br>{{item.since | date : "dd/MM/yyyy - hh:mm"}}
 				</td>
 				<td>{{item.cost}}</td>
 				<td>
