@@ -72,7 +72,7 @@ angular.module('VMFactoryApp')
 			}).then(function (response) {
 				return response.data;
 			});
-		}
+		};
 	
 		var isAuthenticated = function(){
 			if (localStorage.getItem('usr')){

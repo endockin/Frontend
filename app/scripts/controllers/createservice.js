@@ -91,7 +91,7 @@ angular.module('VMFactoryApp')
 			memoryPerShip: $scope.config.memory,
 			name: $scope.config.serviceName,
 			numberOfShips: $scope.config.numberOfContainers
-		}
+		};
 		$scope.saveShip = function(){
 			connect.post('/api/fleet', $scope.shipConfiguration).then(function(data){
 				$scope.services = data;
@@ -105,7 +105,7 @@ angular.module('VMFactoryApp')
 				$state.go('user.dashboard');
 				
 			});
-		}
+		};
 	
 		/*$http({
 			url: $rootScope.ip + '/api/fleet',

@@ -37,8 +37,7 @@
 					<i class="fa fa-lg fa-remove text-color-standout" ng-if="item.deployed"></i>
 				</td>
 				<td>
-					<strong ng-if="!item.running">Running</strong>
-					<strong ng-if="item.running">Stopped</strong>
+					<strong>{{item.running}}</strong> <span ng-if="itme.running">since</span>
 					<br>{{item.since}}
 				</td>
 				<td>{{item.cost}}</td>

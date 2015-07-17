@@ -130,6 +130,7 @@ angular
 				connect.request('/api/fleet').then(function (data) {
 					for (var i = 0, l = data.length; i < l; i++) {
 						var tmp = data[i];
+						console.log(tmp);
 						$scope.userData.images[i] = {
 							id: tmp.name.substring(1),
 							selected: false,
@@ -179,7 +180,7 @@ angular
 			$state.go('presentation.main');
 			genericMessages.message = '<p>You have been successfully logged out</p>';
 			genericMessages.type = 'success';
-		}
+		};
 		$scope.showDetails = function (target) {
 			ngDialog.open({
 				plain:true,
@@ -190,8 +191,8 @@ angular
 						'<p class="row"><b class="col mob-div-50">Memory per ship:</b><span class="col mob-div-50">' + target.memoryPerShip + '</span></p>' +
 						'<p class="row"><b class="col mob-div-50">Disk Space per ship:</b><span class="col mob-div-50">' + target.diskPerShip + '</span></p>' +
 					'</div>'
-			})
-		}
+			});
+		};
 
 		$scope.userData = {
 			allSelected: false,
