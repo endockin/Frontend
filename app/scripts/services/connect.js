@@ -1,13 +1,9 @@
 'use strict';
 
 angular.module('VMFactoryApp')
-	.service('connect', function ($http, $state, genericMessages) {
+	.service('connect', function ($http, $state, genericMessages, $cookies) {
 
-		var userSession = {
-			token: null,
-			generatedAt: null,
-			validUntil: null
-		};
+	
 		var baseUrl = 'http://rocj-inolab-d01:8082';
 		
 		var login = function (usr, pass) {
@@ -25,10 +21,10 @@ angular.module('VMFactoryApp')
 				crossDomain: true
 			}).then(function (response) {
 				var data = response.data;
-				userSession.token = data.key;
-				userSession.generatedAt = data.generatedAt;
-				userSession.validUntil = data.validUntil;
-				localStorage.setItem('usr',JSON.stringify(userSession));
+				//store auth in cookie 
+				 var validity = new Date(data.validUntil);
+                 document.cookie = 'mytoken=' + data.key + '; expires=' + validity.toUTCString() + '; path=/';
+				 
 				return response;
 			}, function(response){
 				console.log('data error');
@@ -37,10 +33,7 @@ angular.module('VMFactoryApp')
 		};
 		
 		var logout = function(){
-			userSession.token=null;
-			userSession.generatedAt=null;
-			userSession.validUntil=null;
-			localStorage.removeItem('usr');
+			  $cookies.remove('mytoken')
 		};
 		
 		var request = function (apiAdr) {
@@ -49,7 +42,7 @@ angular.module('VMFactoryApp')
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					'X-Patron-Api-Key': userSession.token
+					'X-Patron-Api-Key': $cookies.get('mytoken')
 				},
 				dataType: 'application/json',
 				crossDomain: true
@@ -64,7 +57,7 @@ angular.module('VMFactoryApp')
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					'X-Patron-Api-Key': userSession.token
+					'X-Patron-Api-Key': $cookies.get('mytoken')
 				},
 				dataType: 'application/json',
 				data: data
@@ -74,24 +67,21 @@ angular.module('VMFactoryApp')
 			});
 		};
 	
+
 		var isAuthenticated = function(){
-			if (localStorage.getItem('usr')){
-				var tmp = JSON.parse(localStorage.getItem('usr'));
-				if (tmp.token && tmp.validUntil >= Date.now()) {
-					userSession.token = tmp.token;
-					userSession.generatedAt = tmp.generatedAt;
-					userSession.validUntil = tmp.validUntil;
-					return true;
-				} else {
+		//check if cookie hasn't expired
+			if ($cookies.get('mytoken')!=null){
+				return true;
+				} 
+			else {
 					$state.go('presentation.main');
 					genericMessages.message = '<h1>You have been logged out</h1><p>Your session may have expired, please try logging back in</p>';
 					genericMessages.type = 'error';
 					return false;
 				}
-			} else {
-				return false;
-			}
+		
 		};
+
 
 		return {
 			login: login,
