@@ -844,6 +844,9 @@ p {
 	transition: .2s ease-in-out;
 }
 
+.logo-max-height {
+	max-height: 100px;
+}
 .invisible {
 	width: 0;
 	height: 0;

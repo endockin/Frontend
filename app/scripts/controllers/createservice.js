@@ -3,18 +3,24 @@
 angular.module('VMFactoryApp')
 	.controller('CreateServiceCtrl', function ($scope, $state, $location, connect) {
 		if (connect.isAuthenticated()) {
+
 			$scope.config = {
+				id: '',
+				appName: '',
 				cloud: null,
-				repoName: null,
-				id: 'NewRepo',
-				numberOfContainers: 1,
+				fleetName: null,
+				numberOfShips: 1,
 				memory: 256,
 				CPUshares: 1,
 				diskSpace: 512
 			};
-			$scope.addImage = function (name) {
-				$scope.config.id = name;
+			
+			$scope.addFleet = function (param) {
+				$scope.config.id = param.imageName;
+				$scope.config.appName = param.name;
+				$scope.config.logo = param.logo;
 			};
+
 			connect.request('/api/category').then(function (data) {
 				$scope.services = data;
 				$scope.serviceIndexes = (function () {
@@ -30,9 +36,11 @@ angular.module('VMFactoryApp')
 					});
 				}
 			});
-			if (!$scope.config.repoName) {
+
+			if (!$scope.config.fleetName) {
 				$state.go('user.createservice');
 			}
+
 			$scope.tabClass = function (page) {
 				var current = $location.path().substring($location.path().lastIndexOf('/') + 1);
 				return page === current ? 'active' : '';
@@ -40,17 +48,22 @@ angular.module('VMFactoryApp')
 		}
 	})
 	.controller('SelectImageCtrl', function ($scope, $state) {
+
 		$scope.servicesCategory = $state.params.category;
+
 	})
 	.controller('ConfigureImageCtrl', function ($scope, $state) {
+
 		$scope.goToStep3 = function (isValid) {
 			if (isValid) {
 				$state.go('user.createservice.cloudprovider');
 			}
 		};
+
 		if ($scope.config.id) {
 			$state.go('.serviceconfiguration');
 		}
+
 		$scope.configCategories = [
 			{
 				Category: 'Service Configuration',
@@ -90,10 +103,10 @@ angular.module('VMFactoryApp')
 			diskPerShip: $scope.config.diskSpace,
 			memoryPerShip: $scope.config.memory,
 			name: $scope.config.serviceName,
-			numberOfShips: $scope.config.numberOfContainers
+			numberOfShips: $scope.config.numberOfShips
 		};
-		$scope.saveShip = function(){
-			connect.post('/api/fleet', $scope.shipConfiguration).then(function(data){
+		$scope.saveShip = function () {
+			connect.post('/api/fleet', $scope.shipConfiguration).then(function (data) {
 				$scope.services = data;
 				$scope.serviceIndexes = (function () {
 					var tmp = {};
@@ -103,41 +116,7 @@ angular.module('VMFactoryApp')
 					return tmp;
 				}());
 				$state.go('user.dashboard');
-				
+
 			});
 		};
-	
-		/*$http({
-			url: $rootScope.ip + '/api/fleet',
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'X-Patron-Api-Key': $rootScope.token
-			},
-			data: {
-				blueprintName: $scope.config.id,
-				cpuPerShip: $scope.config.CPUshares,
-				diskPerShip: $scope.config.diskSpace,
-				memoryPerShip: $scope.config.memory,
-				name: $scope.config.serviceName,
-				numberOfShips: $scope.config.numberOfContainers
-			},
-			dataType: 'application/json'
-		}).success(function (data) {
-			$scope.services = data;
-			$scope.serviceIndexes = (function () {
-				var tmp = {};
-				for (var i = 0, l = data.length; i < l; i++) {
-					tmp[data[i].name] = i;
-				}
-				return tmp;
-			}());
-			if ($state.current.name === 'user.createservice') {
-				$state.go('.selectimage', {
-					category: data[0].name
-				});
-			}
-		});*/
-	
-
 	});

@@ -140,8 +140,8 @@ angular
 							diskPerShip: tmp.diskPerShip,
 							memoryPerShip: tmp.memoryPerShip,
 							numberOfShips: tmp.numberOfShips,
-							running: tmp.status,
-							since: tmp.statusSince,
+							status: tmp.status,
+							statusSince: tmp.statusSince,
 							cost: '0',
 							schedule: null
 						};

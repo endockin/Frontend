@@ -36,9 +36,12 @@
 					<i class="fa fa-lg fa-check text-color-primary" ng-if="!item.deployed"></i>
 					<i class="fa fa-lg fa-remove text-color-standout" ng-if="item.deployed"></i>
 				</td>
-				<td>
-					<strong>{{item.running}}</strong> <span ng-if="itme.running">since</span>
-					<br>{{item.since | date : "dd/MM/yyyy - hh:mm"}}
+				<td ng-if="item.status">
+					<strong>{{item.status}}</strong> 
+					<span ng-if="item.statusSince"> since <br>{{item.statusSince | date : "dd/MM/yyyy - hh:mm"}}</span>
+				</td>
+				<td ng-if="!item.status">
+					<small>not available</small>
 				</td>
 				<td>{{item.cost}}</td>
 				<td>

@@ -1,11 +1,16 @@
 <div class="main-container pad-xlarge-row">
 	<div class="row pad-large-row">
-		<div class="col tab-div-25">Image:</div>
-		<div class="col tab-div-75">{{config.repoName}}</div>
+		<div class="col tab-div-25">Application:</div>
+		<div class="col tab-div-75">
+			<span ng-if="!config.logo">
+				{{config.appName}}
+			</span>
+			<img ng-if="config.logo" ng-src="{{config.logo}}" class="logo-max-height" />
+		</div>
 	</div>
 	<div class="row pad-large-row">
 		<div class="col tab-div-25">
-			<label for="ServiceName">Service Name</label>
+			<label for="ServiceName">Fleet Name</label>
 		</div>
 		<div class="col tab-div-75">
 			<input type="text" id="ServiceName" name="ServiceName" class="input tab-div-75" ng-model="config.serviceName" required />
@@ -16,13 +21,13 @@
 	</div>
 	<div class="row pad-large-row">
 		<div class="col tab-div-25">
-			<label for="NumberOfContainers">Number of containers</label>
+			<label for="NumberOfShips">Number of ships</label>
 		</div>
 		<div class="col tab-div-75">
-			<input type="number" id="NumberOfContainers" name="NumberOfContainers" class="input tab-div-15" ng-model="config.numberOfContainers" required min="1" />
-			<div ng-show="Step2.$submitted || Step2.NumberOfContainers.$touched">
-				<div ng-show="Step2.NumberOfContainers.$error.required" class="text-color-standout">This field is required</div>
-				<div ng-show="Step2.NumberOfContainers.$error.min" class="text-color-standout">You need at least one container</div>
+			<input type="number" id="NumberOfShips" name="NumberOfShips" class="input tab-div-15" ng-model="config.numberOfShips" required min="1" />
+			<div ng-show="Step2.$submitted || Step2.NumberOfShips.$touched">
+				<div ng-show="Step2.NumberOfShips.$error.required" class="text-color-standout">This field is required</div>
+				<div ng-show="Step2.NumberOfShips.$error.min" class="text-color-standout">You need at least one container</div>
 			</div>
 		</div>
 	</div>
