@@ -124,13 +124,14 @@ angular
 				});
 		};
 	})
-	.controller('UserCtrl', function ($scope, $location, $state, connect, $timeout, genericMessages, ngDialog) {
+	.controller('UserCtrl', function ($scope, $location, $state, connect, $timeout, genericMessages, ngDialog, moment) {
 		$scope.getDashboard = function () {
 			if (connect.isAuthenticated()) {
 				connect.request('/api/fleet').then(function (data) {
 					for (var i = 0, l = data.length; i < l; i++) {
 						var tmp = data[i];
-						console.log(tmp);
+						// add mock cost until real data arrives
+						tmp.statusSince = tmp.statusSince ? tmp.statusSince : new Date(2015, 7, 16, 12, 35);
 						$scope.userData.images[i] = {
 							id: tmp.name.substring(1),
 							selected: false,
@@ -140,11 +141,12 @@ angular
 							diskPerShip: tmp.diskPerShip,
 							memoryPerShip: tmp.memoryPerShip,
 							numberOfShips: tmp.numberOfShips,
-							status: tmp.status,
+							status: tmp.status ? tmp.status : 'started',
 							statusSince: tmp.statusSince,
-							cost: '0',
+							cost: 10 * moment(tmp.statusSince).diff(moment(), 'hours'),
 							schedule: null
 						};
+						console.log($scope.userData.images[i].statusSince);
 					}
 				});
 			}
@@ -183,13 +185,12 @@ angular
 		};
 		$scope.showDetails = function (target) {
 			ngDialog.open({
-				plain:true,
-				template: 
-					'<div>' +
-						'<h1>' + target.name + '</h1>' +
-						'<p class="row"><b class="col mob-div-50">Number of ships:</b><span class="col mob-div-50">' + target.numberOfShips + '</span></p>' +
-						'<p class="row"><b class="col mob-div-50">Memory per ship:</b><span class="col mob-div-50">' + target.memoryPerShip + '</span></p>' +
-						'<p class="row"><b class="col mob-div-50">Disk Space per ship:</b><span class="col mob-div-50">' + target.diskPerShip + '</span></p>' +
+				plain: true,
+				template: '<div>' +
+					'<h1>' + target.name + '</h1>' +
+					'<p class="row"><b class="col mob-div-50">Number of ships:</b><span class="col mob-div-50">' + target.numberOfShips + '</span></p>' +
+					'<p class="row"><b class="col mob-div-50">Memory per ship:</b><span class="col mob-div-50">' + target.memoryPerShip + '</span></p>' +
+					'<p class="row"><b class="col mob-div-50">Disk Space per ship:</b><span class="col mob-div-50">' + target.diskPerShip + '</span></p>' +
 					'</div>'
 			});
 		};
