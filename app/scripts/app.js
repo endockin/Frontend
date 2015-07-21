@@ -124,7 +124,7 @@ angular
 				});
 		};
 	})
-	.controller('UserCtrl', function ($scope, $location, $state, connect, $timeout, genericMessages, ngDialog, moment) {
+	.controller('UserCtrl', function ($scope, $location, $state, connect, $timeout, genericMessages, ngDialog) {
 		$scope.getDashboard = function () {
 			if (connect.isAuthenticated()) {
 				connect.request('/api/fleet').then(function (data) {
