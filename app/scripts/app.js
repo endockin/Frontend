@@ -178,7 +178,6 @@ angular
 			checkRows();
 		};
 		$scope.logout = function () {
-			connect.logout();
 			$state.go('presentation.main');
 			genericMessages.message = '<p>You have been successfully logged out</p>';
 			genericMessages.type = 'success';
@@ -200,6 +199,10 @@ angular
 			selectedRows: false,
 			images: []
 		};
+	
+		$scope.deleteFleet = function(id){
+			connect.deleteFleet('/api/fleet/'+id);
+		};
 
 	})
 	.controller('DashboardCtrl', function ($scope, $timeout) {
@@ -207,5 +210,6 @@ angular
 		$timeout($scope.getDashboard, 5000);
 		$timeout($scope.getDashboard, 10000);
 		$timeout($scope.getDashboard, 15000);
+		
 
 	});

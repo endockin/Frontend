@@ -20,6 +20,7 @@ angular.module('VMFactoryApp')
 				dataType: 'application/json',
 				crossDomain: true
 			}).then(function (response) {
+				console.log(response);
 				var data = response.data;
 				//store auth in cookie 
 				var validity = new Date(data.validUntil);
@@ -66,11 +67,26 @@ angular.module('VMFactoryApp')
 				return response.data;
 			});
 		};
+	
+		var deleteFleet = function(apiAdr){
+			return $http({
+				url: baseUrl + apiAdr,
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-Patron-Api-Key': $cookies.get('mytoken')
+				}/*,
+				data: {"id":id}*/
+			}).then(function (response) {
+				return response.data;
+			});
+		};
 
 
 		var isAuthenticated = function () {
+			console.log('checking authentication');
 			//check if cookie hasn't expired
-			if ($cookies.get('mytoken') !== null) {
+			if ($cookies.get('mytoken')) {
 				return true;
 			} else {
 				$state.go('presentation.main');
@@ -86,6 +102,7 @@ angular.module('VMFactoryApp')
 			login: login,
 			logout: logout,
 			request: request,
+			deleteFleet: deleteFleet,
 			post: post,
 			isAuthenticated: isAuthenticated
 		};
