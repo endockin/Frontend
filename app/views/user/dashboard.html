@@ -33,8 +33,8 @@
 				<td><div ng-repeat="url in item.url"><a ng-href="http://{{url}}">{{url}}</div></a>
 				</td>
 				<td class="text-center">
-					<i class="fa fa-lg fa-check text-color-primary" ng-if="!item.deployed"></i>
-					<i class="fa fa-lg fa-remove text-color-standout" ng-if="item.deployed"></i>
+					<i class="fa fa-lg fa-check text-color-primary" ng-if="!item.url"></i>
+					<i class="fa fa-lg fa-remove text-color-standout" ng-if="item.url"></i>
 				</td>
 				<td ng-if="item.status">
 					<strong>{{item.status}}</strong> 

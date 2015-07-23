@@ -123,14 +123,17 @@ angular
 				});
 		};
 	})
-	.controller('UserCtrl', function ($scope, $location, $state, connect, $timeout, genericMessages, ngDialog) {
+	.controller('UserCtrl', function ($scope, $location, $state, connect, $timeout, genericMessages, ngDialog, $interval) {
 		$scope.getDashboard = function () {
 			if (connect.isAuthenticated()) {
 				connect.request('/api/fleet').then(function (data) {
-					for (var i = 0, l = data.length; i < l; i++) {
+					var i, l;
+					
+					$scope.userData.images = $scope.userData.images.slice(0,$scope.userData.images);
+					for (i = 0, l = data.length; i < l; i++) {
 						var tmp = data[i];
 						// add mock cost until real data arrives
-						tmp.statusSince = tmp.statusSince ? tmp.statusSince : new Date(2015, 7, 16, 12, 35);
+						tmp.statusSince = tmp.statusSince ? tmp.statusSince : new Date();
 						$scope.userData.images[i] = {
 							id: tmp.name.substring(1),
 							selected: false,
@@ -142,13 +145,15 @@ angular
 							numberOfShips: tmp.numberOfShips,
 							status: tmp.status ? tmp.status : 'started',
 							statusSince: tmp.statusSince,
-							cost: 10 * moment(tmp.statusSince).diff(moment(), 'hours'),
+							cost: Math.abs(10 * moment(tmp.statusSince).diff(moment(), 'hours')),
 							schedule: null
 						};
 					}
 				});
 			}
 		};
+		$scope.getDashboard();
+		$interval($scope.getDashboard,3000);
 		function checkRows() {
 			$scope.userData.selectedRows = false;
 			var tmp = $scope.userData.images;
