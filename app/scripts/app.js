@@ -56,8 +56,7 @@ angular
 			})
 			.state('user.dashboard', {
 				url: '/dashboard',
-				templateUrl: 'views/user/dashboard.html',
-				controller: 'DashboardCtrl'
+				templateUrl: 'views/user/dashboard.html'
 			})
 			.state('user.createservice', {
 				url: '/createservice',
@@ -146,12 +145,10 @@ angular
 							cost: 10 * moment(tmp.statusSince).diff(moment(), 'hours'),
 							schedule: null
 						};
-						console.log($scope.userData.images[i].statusSince);
 					}
 				});
 			}
 		};
-
 		function checkRows() {
 			$scope.userData.selectedRows = false;
 			var tmp = $scope.userData.images;
@@ -199,17 +196,24 @@ angular
 			selectedRows: false,
 			images: []
 		};
-	
 		$scope.deleteFleet = function(id){
-			connect.deleteFleet('/api/fleet/'+id);
+			ngDialog.open({
+				plain: true,
+				template:'<div' +
+				'<p><strong>Are you sure you want to delete this fleet?</strong></p>'+
+				'<p class="text-center">'+
+				'<button type="button" class="btn btn-primary" ng-click="confirmDelete(\''+id+'\')"><i class="fa fa-play btn-icon"></i><span>YES</span></button> '+
+				'<button type="button" class="btn btn-standout" ng-click="closeThisDialog()"><i class="fa fa-play btn-icon"></i><span>NO</span></button>'+
+				'</p>',
+				controller:'confirmCtrl'
+			});
+			
 		};
 
 	})
-	.controller('DashboardCtrl', function ($scope, $timeout) {
-		$scope.getDashboard();
-		$timeout($scope.getDashboard, 5000);
-		$timeout($scope.getDashboard, 10000);
-		$timeout($scope.getDashboard, 15000);
-		
-
+	.controller('confirmCtrl', function($scope, connect){
+		$scope.confirmDelete = function(id){
+			connect.deleteFleet('/api/fleet/'+id);
+			$scope.closeThisDialog();
+		};
 	});
