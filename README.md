@@ -1,3 +1,6 @@
+#Build
+[![Build Status](https://snap-ci.com/endockin/Frontend/branch/master/build_image)](https://snap-ci.com/endockin/Frontend/branch/master)
+
 # cloud-e
 
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
